@@ -1,4 +1,4 @@
-module chapter2
+module gin-learn
 
 go 1.16
 
