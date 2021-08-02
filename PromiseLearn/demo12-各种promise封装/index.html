@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let p1 = new Promise((resolve, reject) => {
+            resolve('fulfilled')
+        }).then(
+            value => {
+                // 第一种-普通对象
+                // return {
+                //     name: "farmer", site: "blog.farmer233.top"
+                // }
+
+                // 第二种 
+                // return {
+                //     then(resolve, reject){
+                //         resolve("这是Then对象")
+                //     }
+                // }
+
+                // 第三种
+                // class Farmer {
+                //     then(resolve, reject) {
+                //         resolve("这是Farmer对象里面的Then")
+                //     }
+                // }
+                // return new Farmer()
+                
+                // 第四种
+                return class {
+                    static then(resolve, reject) {
+                        // resolve("成功状态--静态方法")
+                        reject("错误状态--静态方法")
+                    }
+                }
+            }
+        ).then(
+            value => {
+                console.log(value)
+            },
+            reason => {
+                console.log(reason)
+            }
+        )
+    </script>
+</body>
+
+</html>

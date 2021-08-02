@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./ajax.js"></script>
+    <script>
+        function query(name) {
+            const cache = query.cache || (query.cache = new Map())
+            if (cache.has(name)) {
+                console.log('走缓存')
+                return Promise.resolve(cache.get(name))
+            }
+            return ajax(`http://127.0.0.1:5003/?name=${name}`).then(user => {
+                cache.set(name, user)
+                // console.log(cache)
+                return user
+            })
+        }
+        
+        query("farmer").then(user => {
+            console.log(user)
+        })
+
+        setTimeout(() => {
+            query("farmer").then(user => {
+                console.log(user)
+            })
+        }, 1000);
+    </script>
+</body>
+
+</html>

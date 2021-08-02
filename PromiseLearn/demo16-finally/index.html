@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            display: none;
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">.........</div>
+    
+    <script>
+        // const promise = new Promise((resolve, reject) =>{
+        //     reject('farmer')
+        // })
+        // .then(msg => console.log(msg))
+        // .catch(error => console.log(error))
+        // .finally(()=>{
+        //     console.log('永远会执行.')
+        // })
+    </script>
+    <script src="./ajax.js"></script>
+    <script>
+        ajax("http://127.0.0.1:5003/?name=farmer").then(value=>{
+            console.log(value)
+        }).finally(()=>{
+            loading.style.display = "none"
+        })
+    </script>
+</body>
+</html>

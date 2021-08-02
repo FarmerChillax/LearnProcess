@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./ajax.js"></script>
+    <script>
+        function farmer(name) {
+            // ajax是一个promise对象
+            return ajax(`http://localhost:5003/?name=${name}`)
+        }
+
+        farmer('farmer-blog')
+            .then(user => {
+                console.log(user)
+            }).catch(e => {
+                console.log(e)
+            })
+        
+        async function main(){
+            try {
+                const user = await farmer('farmer-blog')
+                console.log(user)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        
+        main()
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./ajax.js"></script>
+    <script>
+        // class User{
+        //     then(resolve, reject){
+        //         resolve()
+        //     }
+        // }
+
+        // async function get(){
+        //     await new User()
+        //     console.log('farmer233.top')
+        // }
+        // get()
+        class User {
+            constructor(name){
+                this.name = name
+            }
+            then(resolve, reject) {
+                let user = ajax(`http://localhost:5003/?name=${this.name}`)
+                resolve(user)
+            }
+        }
+
+        async function get() {
+            let user = await new User('farmer')
+            console.log('farmer233.top')
+            console.log(user)
+        }
+        get()
+    </script>
+</body>
+
+</html>

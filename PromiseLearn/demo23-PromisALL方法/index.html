@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./ajax.js"></script>
+    <script>
+        // const farmer = new Promise((resolve, reject) =>{
+        //     setTimeout(() => {
+        //         // resolve('第一个Promise.')
+        //         reject('第一个Promise.')
+        //     }, 1000);
+        // }).catch(error =>{
+        //     console.log(error)
+        // })
+
+        // const blog = new Promise((resolve, reject) =>{
+        //     setTimeout(() => {
+        //         resolve('第二个Promise.')
+        //     }, 1000);
+        // })
+
+        // Promise.all([farmer, blog]).then(result =>{
+        //     console.log(result)
+        // }).catch(error =>{
+        //     console.log(error)
+        // })
+
+        // 批量获取用户资料
+        function getUsers(names) {
+            let promises = names.map(name => {
+                return ajax(`http://127.0.0.1:5003/?name=${name}`)
+            })
+            return Promise.all(promises)
+        }
+
+        let names = ['farmer', 'xiaotao']
+
+        getUsers(names).then(users => {
+            console.log(users)
+        })
+        
+    </script>
+</body>
+
+</html>

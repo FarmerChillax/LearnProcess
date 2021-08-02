@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let promise = new Promise(resolve => {
+            // 这里的setTimeout是宏任务
+            setTimeout(() => {
+                resolve()
+                console.log('setTimeout')
+            }, 0); //可以调整时间观察效果
+
+            // resolve()
+            console.log('Promise')
+        }).then(value => {
+            console.log('then')
+        })
+        console.log('blog.farmer233.top')
+    </script>
+</body>
+
+</html>

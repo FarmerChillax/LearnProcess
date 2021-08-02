@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 任务优先级
+
+        // 宏任务
+        setTimeout(() => {
+            // setTimeout 定时器会挂载到宏任务队列
+            console.log('setTimeout')
+        }, 0);
+
+        // 微任务
+        new Promise(resolve=>{
+            // Promise这里微任务优先级最高(目前)
+            console.log('Promise-header')
+            // 成功通知, 成功后才会将then加入到微任务队列中
+            resolve() 
+            console.log('Promise-after-resolve')
+        }).then(value=>{
+            console.log('Then-success')
+        })
+
+        // 主线程
+        console.log('farmer')
+
+    </script>
+</body>
+</html>

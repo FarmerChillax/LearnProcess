@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./ajax.js"></script>
+    <script>
+        async function farmer(name) {
+            try {
+                let user = await ajax(`http://localhost:5003/?name=${name}`)
+                // console.log('333')
+                return user
+            } catch (error) {
+                console.log(error)
+            }
+            console.log('233')
+            console.log('***************************')
+        }
+
+        async function farmer_2(name) {
+            try {
+                let user = await ajax(`http://localhost:5003/?name=${name}`)
+                let next_user = await ajax(`http://localhost:5003/?id=${user.next}`)
+                return next_user
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        farmer('farmer')
+        // .then(user => {
+        //     console.log(user)
+        // }).catch(e => {
+        //     console.log(e.message)
+        // })
+        
+        farmer_2('farmer').then(user=>{
+            console.log(user)
+        })
+    </script>
+</body>
+
+</html>

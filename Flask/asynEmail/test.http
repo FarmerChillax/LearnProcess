@@ -1,0 +1,11 @@
+
+### send mail
+
+POST http://127.0.0.1:5000/mail HTTP/1.1
+Content-Type: application/json
+
+{
+    "subject": "标题",
+    "user_email": "farmer-chong@qq.com",
+    "body": "回信测试"
+}

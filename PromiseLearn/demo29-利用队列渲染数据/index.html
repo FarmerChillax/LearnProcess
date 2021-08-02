@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class User {
+            ajax(user) {
+                let url = `http://127.0.0.1:5003/`
+                return new Promise((resolve, reject) => {
+                    let xhr = new XMLHttpRequest()
+                    xhr.open('GET', `${url}?name=${user}`)
+                    xhr.send()
+                    xhr.onload = function () {
+                        if (this.status == 200) {
+                            resolve(JSON.parse(this.response))
+                        } else {
+                            reject("加载失败")
+                        }
+                    }
+                    xhr.onerror = function () {
+                        reject(this)
+                    }
+                })
+            }
+            render(users) {
+                users.reduce((promise, user) =>{
+                    return promise.then(_=>{
+                        // return new Promise(resolve=>{
+
+                        // })
+                        return this.ajax(user)
+                    }).then(user=>{
+                        return this.view(user)
+                    })
+                }, Promise.resolve())
+            }
+            view(user){
+                return new Promise(resolve=>{
+                    console.log(user)
+                    let h2 = document.createElement('h2')
+                    h2.innerHTML = user.name
+                    document.body.appendChild(h2)
+                    resolve()
+                })
+            }
+        }
+        new User().render(['farmer', 'xiaotao'])
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./ajax.js"></script>
+    <script>
+        // const p1 = new Promise((resolve, reject) => {
+        //     // resolve('第一个Promise.')
+        //     reject('第一个reject.')
+        // })
+
+        // const p2 = new Promise((resolve, reject) => {
+        //     resolve('第二个Promise.')
+        // })
+
+        // Promise.allSettled([p1, p2]).then(results => {
+        //     console.log(results)
+        // })
+        // 不会因为获取不到(reject)而失败
+        let promises = ['farmer', 'xiaotao', 'xiaoxi'].map(name => {
+            return ajax(`http://127.0.0.1:5003/?name=${name}`)
+        })
+
+        Promise.allSettled(promises).then(values => {
+            let users = values.filter(user =>{
+                return user.status == "fulfilled"
+            })
+            console.log(users)
+        })
+
+    </script>
+</body>
+
+</html>

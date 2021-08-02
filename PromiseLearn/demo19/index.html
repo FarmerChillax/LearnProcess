@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* body  */
+        div {
+            /* left: 3px; */
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="left: 10px;"></div>
+    <script>
+        function interval(delay = 1000, callback) {
+            return new Promise(resolve => {
+                let id = setInterval(() => {
+                    callback(id, resolve)
+                }, delay)
+            })
+        }
+
+        interval(100, (id, resolve) => {
+            const div = document.querySelector('div')
+            let left = parseInt(window.getComputedStyle(div).left)
+            div.style.left = left + 10 + 'px'
+
+            if (left >= 200) {
+                clearInterval(id)
+                resolve(div)
+            }
+        }).then(div => {
+            return interval(100, (id, resolve)=>{
+                let width = parseInt(window.getComputedStyle(div).width)
+                div.style.width = width - 10 + 'px'
+                if (width <= 20){
+                    clearInterval(id)
+                    resolve(div)
+                }
+            })
+        }).then(div=>{
+            div.style.backgroundColor = "red"
+        })
+    </script>
+</body>
+
+</html>

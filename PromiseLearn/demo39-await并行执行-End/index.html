@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function farmer_1(){
+            return new Promise(resolve =>{
+                setTimeout(() => {
+                    resolve('farmer')
+                }, 2000);
+            })
+        }
+
+        function farmer_2(){
+            return new Promise(resolve =>{
+                setTimeout(() => {
+                    resolve('blog.farmer.top')
+                }, 2000);
+            })
+        }
+        // async function farmer(){
+        //     // let p1 =  farmer_1()
+        //     // // console.log(p1)
+        //     // let p2 =  farmer_2()
+
+        //     // let p1_value = await p1
+        //     // let p2_value = await p2
+        //     // console.log(p1_value, p2_value)
+        //     // console.log(p2)
+        //     // setTimeout(() => {
+        //     //     console.log(p1, p2)
+        //     // }, 2000);
+        // }
+
+        // farmer()
+        async function farmer(){
+            let res = await Promise.all([farmer_1(), farmer_2()])
+            console.log(res)
+        }
+
+        farmer()
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./ajax.js"></script>
+    <script>
+        //  Promise race -> 赛跑 -> 传入数组，谁快用谁。
+        
+        // 一、简单的demo
+        // const p1 = new Promise((resolve, reject) =>{
+        //     setTimeout(() => {
+        //         resolve('第一个Promis.')
+        //     }, 2000);
+        // })
+
+        // const p2 = new Promise((resolve, reject) =>{
+        //     setTimeout(() => {
+        //         resolve('第二个异步')
+        //     }, 1000);
+        // })
+
+        // Promise.race([p1, p2])
+        // .then(results =>{
+        //     console.log(results)
+        // }).catch(msg =>{
+        //     console.log(msg)
+        // })
+
+        // 二、请求超时
+        function query(url, delay = 2000) {
+            let promises = [
+                ajax(url),
+                new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        reject('请求超时')
+                    }, delay);
+                })
+            ]
+
+            return Promise.race(promises)
+        }
+
+        let url = `http://127.0.0.1:5003/?name=farmer`
+
+        query(url, 1000).then(value =>{
+            console.log(value)
+        }).catch(error =>{
+            console.log(error)
+        })
+    </script>
+</body>
+
+</html>

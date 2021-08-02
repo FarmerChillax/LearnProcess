@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // async语法糖装饰一个函数，该函数就会变成promise对象，如下
+        // async function farmer(){
+        // }
+        // console.log(farmer())
+
+        // async function farmer() {
+        //     return 'farmer233.top'
+        // }
+        // farmer().then(_ => console.log(_))
+
+        // await相当于then
+        async function farmer(){
+            let value = await new Promise(resolve =>{
+                setTimeout(() => {
+                    resolve('blog.farmer233.top')
+                }, 2000);
+            })
+            console.log(value)
+        }
+        farmer()
+    </script>
+</body>
+
+</html>

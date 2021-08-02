@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./ajax.js"></script>
+    <script>
+        ajax('http://127.0.0.1:5003/?name=farmer', (user) => {
+            // 先拿到一个东西，再用这个东西去查别的，比如通过用户名查该用户的资料
+            ajax('http://127.0.0.1:5003/?name=' + user.name, (e) => {
+                console.log(e)
+            })
+        })
+
+        console.log("farmer")
+    </script>
+</body>
+
+</html>

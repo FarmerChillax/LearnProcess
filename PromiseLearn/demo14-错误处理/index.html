@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 栗子1
+        // new Promise((resolve, reject) => {
+        //     reject(new Error("Promise error message."))
+        // }).then(
+        //     value => {
+        //         console.log(value)
+        //     }, reason => {
+        //         console.log(reason)
+        //         console.log(reason.message)
+        //     }
+        // )
+        // 栗子2
+        // new Promise((resolve, reject) => {
+        //     // reject(new Error("Promise error message."))
+        //     // throw new Error('fail')
+        //     // farmer + 1 // 变量未声明, JavaScript自动捕捉错误, 原理如下面的try catch
+        //     try {
+        //         farmer + 1
+        //     } catch (error) {
+        //         reject('Promise error message.')
+        //     }
+        // }).then(
+        //     value => {
+        //         console.log('value')
+        //         console.log(value)
+        //     },
+        //     reason => {
+        //         console.log('reason')
+        //         console.log(reason)
+        //         console.log(reason.message)
+        //     }
+        // )
+        // 栗子3
+        new Promise((resolve, reject) => {
+            // reject(new Error("Promise error message."))
+            // throw new Error('fail')
+            // farmer + 1 // 变量未声明, JavaScript自动捕捉错误, 原理如下面的try catch
+            // reject('rejected.')
+            resolve('resolve.')
+        }).then(
+            value => {
+                console.log('value-1')
+                return new Promise((resolve, reject) => {
+                    reject('Then reject.')
+                })
+            },
+            reason => {
+                console.log('reason-1')
+            }
+        ).then(
+            value => {
+                console.log('value-2', value)
+            },
+            reason => {
+                console.log('reason-2', reason)
+                return new Promise((resolve, reject) => {
+                    reject('Then reject.-2')
+                })
+            }
+        ).then(
+            // 这里的Then没有对上一个then的失败情况做处理, 用catch来同一对错误做处理
+            value => console.log(value)
+        ).catch(error => {
+            // catch 是统一对这条微任务队列(Promise链)做错误处理，不论是哪个任务发生错误都可以处理。注意 “统一”
+            console.log('catch', error)
+        })
+    </script>
+</body>
+
+</html>

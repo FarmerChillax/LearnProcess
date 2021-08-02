@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        new Promise((resolve, reject) =>{
+            // resolve('成功状态发送~')
+            reject("错误状态发送~")
+        }).then(value=>{
+            console.log(value)
+        }, reason=>{
+            console.log(reason)
+        }).then(
+            // 什么也不做，向后传递
+        ).then(value=>{
+            console.log(`只处理成功${value}`)
+        }, null // null可省略
+        ).then(null, error=>{
+            console.log(`只处理错误${value}`)
+        })
+    </script>
+</body>
+</html>

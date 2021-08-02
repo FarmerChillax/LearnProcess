@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // resolved 成功
+        // rejected 拒绝
+        new Promise((resolve, reject) => {
+            // 工作流程
+            resolve("成功状态")
+            // reject("失败状态")
+        }).then( // then -> 微任务列表
+            // 工作后的处理
+            // then方法有两个参数，第一个是成功的回调函数，第二个是失败的
+            value => {
+                // 成功
+                console.log("成功业务处理-1")
+            }, 
+            reason => {
+                // 失败
+                console.log('失败(拒绝)的业务处理-1')
+            }
+        ).then(
+            // 工作后的处理
+            // then方法有两个参数，第一个是成功的回调函数，第二个是失败的
+            value => {
+                // 成功
+                console.log("成功业务处理-2")
+            },
+            reason => {
+                // 失败
+                console.log('失败(拒绝)的业务处理-2')
+            }
+        )
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function request() {
+        //     return new Promise((resolve, reject) => {
+        //         resolve('成功')
+        //     })
+        // }
+
+        // request().then(value => console.log(value))
+    </script>
+    <script src="./ajax.js"></script>
+    <script>
+        let url = "http://127.0.0.1:5003/"
+        ajax(`${url}?name=xiaotao`).then(
+            value => {
+                // 这里可以通过第一个数据再发送请求
+                return ajax(`${url}?name=farmer`)
+            }
+        ).then(
+            value => console.log(value),
+            reason => console.log(reason)
+        )
+
+    </script>
+</body>
+
+</html>
