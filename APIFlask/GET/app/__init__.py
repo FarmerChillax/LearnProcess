@@ -52,6 +52,7 @@ def register_hooks(app:APIFlask):
             "phone": 1234567890,
             "password": "admin"
         },]
+        db.drop_all()
         db.create_all()
         for user in users:
             item = User(**user)
