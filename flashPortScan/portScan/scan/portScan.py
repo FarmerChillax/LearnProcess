@@ -5,11 +5,15 @@
     :url: https://blog.farmer233.top
     :date: 2021/08/05 00:38:35
 '''
-
+import sys
 import time
 import asyncio
 
-SCAN_RATE = 500
+WIN = sys.platform.startswith('win')
+if WIN:
+    SCAN_RATE = 500
+else:
+    SCAN_RATE = 1024
 
 class PortScan(object):
 
@@ -35,23 +39,23 @@ class PortScan(object):
                 return (ip, port, False)
 
 
-    async def callback(self, future):
+    def callback(self, future):
         """扫描回调函数
             用于记录扫描信息、写库操作等。
         Args:
             future ([type]): 扫描结果
         """
-        async with self.mtx:
-            ip, port, status = future.result()
-            if status:
-                # 记录ip和port
-                try:
-                    if ip in self.open_list:
-                        self.open_list[ip].append(port)
-                    else:
-                        self.open_list[ip] = [port]
-                except Exception as e:
-                    print(e)
+        # async with self.mtx:
+        ip, port, status = future.result()
+        if status:
+            # 记录ip和port
+            try:
+                if ip in self.open_list:
+                    self.open_list[ip].append(port)
+                else:
+                    self.open_list[ip] = [port]
+            except Exception as e:
+                print(e)
 
     def async_scan(self, ip_port_list):
 
