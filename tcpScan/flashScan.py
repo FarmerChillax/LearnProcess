@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 '''
+    :file: flashScan.py
+    :author: -Farmer
+    :url: https://blog.farmer233.top
+    :date: 2021/08/06 13:51:36
+'''
+# -*- coding: utf-8 -*-
+'''
     :file: portScan.py
     :author: -Farmer
     :url: https://blog.farmer233.top
@@ -114,11 +121,10 @@ class PortScan(object):
 
 if __name__ == '__main__':
     print("PortScanner running ...")
-    host = 'farmer233.top'
+    host = 'xiaotao2333.top'
     now = time.time
-
     start = now()
-    scanner = PortScan(all_ports=False)
+    scanner = PortScan(all_ports=True, rate=8000)
     scanner.async_port_scan("192.168.2.123")
 
     end = now()
