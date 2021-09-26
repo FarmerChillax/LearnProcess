@@ -1,12 +1,10 @@
-package main
+package sorts
 
-import "fmt"
-
-func main() {
-	arr := []int{5, 4, 3, 2, 1, 7, 6, 8, 9}
-	arr = selectionSort(arr)
-	fmt.Println(arr)
-}
+// func main() {
+// 	arr := []int{5, 4, 3, 2, 1, 7, 6, 8, 9}
+// 	arr = selectionSort(arr)
+// 	fmt.Println(arr)
+// }
 
 func findSmallest(arr []int) int {
 	smallest := arr[0]
@@ -20,6 +18,8 @@ func findSmallest(arr []int) int {
 	return smallest_index
 }
 
+func FindSmallest(arr []int) int { return findSmallest(arr) }
+
 func selectionSort(arr []int) (result []int) {
 	count := len(arr)
 	for i := 0; i < count; i++ {
@@ -29,3 +29,5 @@ func selectionSort(arr []int) (result []int) {
 	}
 	return result
 }
+
+func SelectionSort(arr []int) []int { return selectionSort(arr) }

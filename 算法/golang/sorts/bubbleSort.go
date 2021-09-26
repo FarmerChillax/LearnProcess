@@ -1,19 +1,17 @@
-package main
-
-import "fmt"
+package sorts
 
 func NewArray() []int {
 	return []int{5, 8, 6, 3, 9, 2, 1, 7}
 }
 
-func main() {
-	targetList := NewArray()
-	bubbleSort(targetList)
-	fmt.Println(targetList)
-	targetList = NewArray()
-	optimizationBubbleSort(targetList)
-	fmt.Println(targetList)
-}
+// func main() {
+// 	targetList := NewArray()
+// 	bubbleSort(targetList)
+// 	fmt.Println(targetList)
+// 	targetList = NewArray()
+// 	optimizationBubbleSort(targetList)
+// 	fmt.Println(targetList)
+// }
 
 func bubbleSort(array []int) {
 	var flag bool = false
@@ -30,6 +28,10 @@ func bubbleSort(array []int) {
 			break
 		}
 	}
+}
+
+func BubbleSort(array []int) {
+	bubbleSort(array)
 }
 
 func optimizationBubbleSort(array []int) {
@@ -52,4 +54,8 @@ func optimizationBubbleSort(array []int) {
 			break
 		}
 	}
+}
+
+func OptimizationBubbleSort(array []int) {
+	optimizationBubbleSort(array)
 }
