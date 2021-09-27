@@ -1,11 +1,9 @@
-package main
+package sub
 
-import "fmt"
-
-func main() {
-	res := tribonacci(25)
-	fmt.Println(res)
-}
+// func main() {
+// 	res := tribonacci(25)
+// 	fmt.Println(res)
+// }
 
 // ...
 func tribonacci(n int) int {

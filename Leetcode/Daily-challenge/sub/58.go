@@ -1,8 +1,4 @@
-package main
-
-import (
-	"fmt"
-)
+package sub
 
 func lengthOfLastWord(s string) (res int) {
 	i := len(s) - 1
@@ -16,6 +12,6 @@ func lengthOfLastWord(s string) (res int) {
 	return res
 }
 
-func main() {
-	fmt.Println(lengthOfLastWord("   fly me   to   the moon  "))
-}
+// func main() {
+// 	fmt.Println(lengthOfLastWord("   fly me   to   the moon  "))
+// }

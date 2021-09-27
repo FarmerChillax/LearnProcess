@@ -1,6 +1,4 @@
-package main
-
-import "fmt"
+package sub
 
 func numberOfArithmeticSlices(nums []int) int {
 	n := len(nums)
@@ -19,8 +17,8 @@ func numberOfArithmeticSlices(nums []int) int {
 	return ans
 }
 
-func main() {
-	nums := []int{1}
-	res := numberOfArithmeticSlices(nums)
-	fmt.Println(res)
-}
+// func main() {
+// 	nums := []int{1}
+// 	res := numberOfArithmeticSlices(nums)
+// 	fmt.Println(res)
+// }
