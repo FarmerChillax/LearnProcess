@@ -1,4 +1,4 @@
-package day1test
+package test
 
 import (
 	"offer/day1"
