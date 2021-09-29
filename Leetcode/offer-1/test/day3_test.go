@@ -6,10 +6,19 @@ import (
 	"testing"
 )
 
-func TestDay3Sub1(t *testing.T) {
+func TestDay3Sub1V1(t *testing.T) {
 	s := "We are happy."
 	expected := "We%20are%20happy."
-	res := day3.ReplaceSpace(s)
+	res := day3.ReplaceSpaceV1(s)
+	if res != expected {
+		t.Errorf("not match, res: %v\n", res)
+	}
+}
+
+func TestDay3Sub1V2(t *testing.T) {
+	s := "We are happy."
+	expected := "We%20are%20happy."
+	res := day3.ReplaceSpaceV2(s)
 	if res != expected {
 		t.Errorf("not match, res: %v\n", res)
 	}

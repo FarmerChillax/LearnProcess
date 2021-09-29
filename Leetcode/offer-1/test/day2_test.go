@@ -1,7 +1,6 @@
 package test
 
 import (
-	"fmt"
 	"offer/day2"
 	"reflect"
 	"testing"
@@ -60,6 +59,5 @@ func TestDay2Sub1V3(t *testing.T) {
 
 func TestDay2Sub2(t *testing.T) {
 	// todoing
-	lists := []int{1, 2, 3, 4, 5}
-	fmt.Println(lists)
+	// lists := []int{1, 2, 3, 4, 5}
 }
