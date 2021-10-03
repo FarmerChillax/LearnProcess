@@ -72,3 +72,15 @@ func BenchmarkDay4Sub1V2(b *testing.B) {
 		_ = day4.FindRepeatNumberV2([]int{2, 3, 1, 0, 2, 5, 3})
 	}
 }
+
+func BenchmarkDay4Sub2(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_ = day4.Search([]int{5, 7, 7, 8, 8, 10}, 8)
+	}
+}
+
+func BenchmarkDay4Sub2V2(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_ = day4.SearchV2([]int{5, 7, 7, 8, 8, 10}, 8)
+	}
+}
