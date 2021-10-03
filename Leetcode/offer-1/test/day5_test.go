@@ -58,11 +58,11 @@ func T2Sub1(t *testing.T) {
 }
 
 func T2Sub2(t *testing.T) {
-	input := []int{2, 2, 2, 0, 1}
-	expected := 0
+	input := []int{3, 5, 1}
+	expected := 1
 	res := day5.MinArray(input)
 	if res != expected {
-		t.Errorf("result error, res value: %c\n", res)
+		t.Errorf("result error, res value: %v\n", res)
 	}
 }
 
@@ -79,7 +79,7 @@ func TestDay5Sub(t *testing.T) {
 	// t.Run("sub1=1", T1Sub1)
 	// t.Run("sub1=2", T1Sub2)
 	t.Run("T3=1", T3Sub1)
-	t.Run("T2=1", T2Sub1)
+	// t.Run("T2=1", T2Sub1)
 	t.Run("T2=2", T2Sub2)
-	t.Run("T2=3", T2Sub3)
+	// t.Run("T2=3", T2Sub3)
 }

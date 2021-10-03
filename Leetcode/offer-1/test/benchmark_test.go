@@ -4,6 +4,7 @@ import (
 	"offer/day2"
 	"offer/day3"
 	"offer/day4"
+	"offer/day6"
 	"testing"
 )
 
@@ -82,5 +83,21 @@ func BenchmarkDay4Sub2(b *testing.B) {
 func BenchmarkDay4Sub2V2(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_ = day4.SearchV2([]int{5, 7, 7, 8, 8, 10}, 8)
+	}
+}
+
+func BenchmarkDay6Sub1V1(b *testing.B) {
+	inputList := []int{3, 2, 9, 0, 0, 10, 0, 0, 8, 0, 4}
+	for i := 0; i < b.N; i++ {
+		root := day6.NewTree(&inputList)
+		_ = day6.LevelOrder(root)
+	}
+}
+
+func BenchmarkDay6Sub1V2(b *testing.B) {
+	inputList := []int{3, 2, 9, 0, 0, 10, 0, 0, 8, 0, 4}
+	for i := 0; i < b.N; i++ {
+		root := day6.NewTree(&inputList)
+		_ = day6.LevelOrderV2(root)
 	}
 }

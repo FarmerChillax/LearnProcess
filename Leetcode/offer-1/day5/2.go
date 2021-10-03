@@ -1,15 +1,20 @@
 package day5
 
-import "fmt"
-
+// 左边大于右边时，右边的元素为目标
 func minArray(numbers []int) int {
-	if len(numbers) == 0 {
-		return 0
+	low := 0
+	high := len(numbers) - 1
+	for low < high {
+		mid := low + (high-low)>>1
+		if numbers[mid] < numbers[high] {
+			high = mid
+		} else if numbers[mid] > numbers[high] {
+			low = mid + 1
+		} else {
+			high--
+		}
 	}
-	mid := len(numbers) >> 1
-	fmt.Println(numbers[:mid], numbers[mid:])
-
-	return 0
+	return numbers[low]
 }
 
 func MinArray(numbers []int) int {
