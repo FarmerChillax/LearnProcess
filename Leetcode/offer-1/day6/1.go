@@ -38,6 +38,10 @@ func (this *Queue) isNil() bool {
 	return false
 }
 
+func (this *Queue) clean() {
+	this.Val = []*TreeNode{}
+}
+
 var que Queue
 
 func levelOrderV1(root *TreeNode) []int {

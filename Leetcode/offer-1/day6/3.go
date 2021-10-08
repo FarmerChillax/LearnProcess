@@ -1,21 +1,12 @@
 package day6
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
-
-func levelOrderT2(root *TreeNode) (res [][]int) {
+func levelOrderT3(root *TreeNode) (res [][]int) {
 	if root == nil {
 		return
 	}
-
 	queue := Queue{}
 	queue.push(root)
+	flag := 1
 	for !queue.isNil() {
 		var tmp []int
 		var newQue []*TreeNode
@@ -30,11 +21,22 @@ func levelOrderT2(root *TreeNode) (res [][]int) {
 			}
 		}
 		queue.Val = newQue
+		if flag == -1 {
+			tmp = reverse(tmp)
+		}
+		flag *= -1
 		res = append(res, tmp)
 	}
 	return res
 }
 
-func LevelOrderT2(root *TreeNode) [][]int {
-	return levelOrderT2(root)
+func reverse(revSlice []int) []int {
+	for i, j := 0, len(revSlice)-1; i < j; i, j = i+1, j-1 {
+		revSlice[i], revSlice[j] = revSlice[j], revSlice[i]
+	}
+	return revSlice
+}
+
+func LevelOrderT3(root *TreeNode) [][]int {
+	return levelOrderT3(root)
 }
