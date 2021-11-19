@@ -9,9 +9,9 @@ import (
 
 func worker(ports chan int, results chan int) {
 	for p := range ports {
-		address := fmt.Sprintf("192.168.2.122:%d", p)
+		address := fmt.Sprintf("172.16.90.%d:80", p)
 		fmt.Printf("start %s\n", address)
-		conn, err := net.DialTimeout("tcp", address, time.Second*5)
+		conn, err := net.DialTimeout("tcp", address, time.Second*1)
 		if err != nil {
 			results <- 0
 			continue
@@ -23,9 +23,9 @@ func worker(ports chan int, results chan int) {
 
 func main() {
 	start := time.Now()
-	ports := make(chan int, 30000)
+	ports := make(chan int, 100)
 	results := make(chan int, 100)
-	scanEndPort := 65535
+	scanEndPort := 255
 	var openPorts []int
 	var closePorts []int
 
