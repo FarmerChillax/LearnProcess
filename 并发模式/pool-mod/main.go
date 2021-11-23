@@ -44,7 +44,6 @@ func main() {
 
 	// 使用资源池中的链接来完成查询
 	for query := 0; query < maxGoroutines; query++ {
-		//
 		go func(q int) {
 			performQueries(q, p)
 			wg.Done()
