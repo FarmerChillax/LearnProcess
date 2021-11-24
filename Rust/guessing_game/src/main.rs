@@ -7,26 +7,37 @@ fn main() {
     println!("猜数！");
 
     let secret_number = rand::thread_rng().gen_range(1, 101);
-    println!("神秘数字是: {}", secret_number);
-    println!("猜测一个数");
 
-    // 声明变量
-    // let mut foo = 1; // 可变变量
-    // let bar = foo; // immutable, 不可变变量
-    // foo = 2;
-    let mut guess = String::new();
+    // 死循环
+    loop {
+        // 声明变量
+        // let mut foo = 1; // 可变变量
+        // let bar = foo; // immutable, 不可变变量
+        // foo = 2;
+        let mut guess = String::new();
 
-    io::stdin().read_line(&mut guess).expect("无法读取行");
-    // io::Result Ok, Err
+        io::stdin().read_line(&mut guess).expect("无法读取行");
+        // io::Result Ok, Err
 
-    // shadow, 类型转换
-    let guess: u32 = guess.trim().parse().expect("Please type a number!");
-    
-    println!("你猜测的数是：{}", guess);
+        // shadow, 类型转换
+        // .expect("Please type a number!");
+        let guess: u32 = match guess.trim().parse(){
+            Ok(num) => num,
+            Err(_) => continue,
+        };
 
-    match guess.cmp(&secret_number) {
-        Ordering::Less => println!("Too small!"),
-        Ordering::Greater => println!("Too big!"),
-        Ordering::Equal => println!("You win!"),
+        println!("你猜测的数是：{}", guess);
+
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
+            Ordering::Equal => {
+                println!("You win!");
+                break;
+            },
+        }
+        println!("猜测一个数");
     }
+
+    
 }
