@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+message Person {
+    int32 id = 1;
+    string name = 2;
+    float height = 3;
+    float weight = 4;
+    bytes avatar = 5;
+    string email = 6;
+    bool email_verified =7;
+
+    repeated string phone_numbers = 8; // packed
+
+    // string foo = 10;
+
+    reserved 9, 10, 20 to 100, 200 to max;
+    reserved "foo", "bar";
+}
