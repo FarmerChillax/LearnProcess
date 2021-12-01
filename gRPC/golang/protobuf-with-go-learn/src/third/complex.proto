@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package example.third;
+
+option go_package = "complexpb/";
+
+message DepartmentMessage {
+    int32 id = 1;
+    string name = 2;
+    repeated EmployeeMessage employees = 3;
+    DepartmentMessage parent_department = 4;
+    repeated DepartmentMessage children_departments = 5;
+}
+
+message EmployeeMessage {
+    int32 id = 1;
+    string name = 2;
+}

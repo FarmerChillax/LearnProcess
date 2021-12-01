@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package example.first;
+
+option go_package = "firstpb";
+// option go_package = "example_first/";
+
+message PersonMessage {
+    int32 id = 1;
+    bool is_adult = 2;
+    string name = 3;
+    repeated int32 luck_number = 4;
+}
