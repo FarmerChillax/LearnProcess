@@ -1,6 +1,4 @@
-package main
-
-import "fmt"
+package day1
 
 func majorityElement(nums []int) int {
 	var res int
@@ -21,10 +19,4 @@ func majorityElement(nums []int) int {
 	}
 
 	return res
-}
-
-func main() {
-	raw := []int{3, 2, 3}
-	res := majorityElement(raw)
-	fmt.Println(res)
 }

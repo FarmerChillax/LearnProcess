@@ -1,4 +1,4 @@
-package main
+package day3
 
 // O(n^2) Base func
 func rotate(matrix [][]int) {
@@ -24,8 +24,4 @@ func rotate2(matrix [][]int) {
 				matrix[n-j-1][i], matrix[n-i-1][n-j-1], matrix[j][n-i-1], matrix[i][j]
 		}
 	}
-}
-
-func main() {
-
 }

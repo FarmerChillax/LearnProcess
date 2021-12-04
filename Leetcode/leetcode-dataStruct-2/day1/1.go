@@ -1,6 +1,4 @@
-package main
-
-import "fmt"
+package day1
 
 func singleNumber(nums []int) int {
 	var res int
@@ -8,10 +6,4 @@ func singleNumber(nums []int) int {
 		res ^= num
 	}
 	return res
-}
-
-func main() {
-	raw := []int{2, 2, 1}
-	res := singleNumber(raw)
-	fmt.Println(res)
 }

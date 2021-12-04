@@ -1,6 +1,4 @@
-package main
-
-import "fmt"
+package day1
 
 func threeSum(nums []int) [][]int {
 	rMap := make(map[int][]int)
@@ -17,10 +15,4 @@ func threeSum(nums []int) [][]int {
 		}
 	}
 	return res
-}
-
-func main() {
-	raw := []int{-1, 0, 1, 2, -1, -4}
-	res := threeSum(raw)
-	fmt.Println(res)
 }

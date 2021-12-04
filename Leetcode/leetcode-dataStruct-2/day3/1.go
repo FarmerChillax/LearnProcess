@@ -1,4 +1,4 @@
-package main
+package day3
 
 import "fmt"
 
@@ -22,9 +22,4 @@ func getRow(rowIndex int) []int {
 	res := generate(rowIndex + 1)
 	fmt.Println(res[len(res)-1])
 	return []int{}
-}
-
-func main() {
-	numRows := 3
-	getRow(numRows)
 }

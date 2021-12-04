@@ -1,18 +1,4 @@
-package main
-
-import "fmt"
-
-func main() {
-	myHashMap := Constructor()
-	myHashMap.Put(1, 2)
-	fmt.Println(myHashMap)
-	myHashMap.Put(1, 3)
-	fmt.Println(myHashMap)
-	fmt.Println(myHashMap.Get(1))
-	myHashMap.Remove(1)
-	fmt.Println(myHashMap)
-	fmt.Println(myHashMap.Get(1))
-}
+package day2
 
 type MyHashMap struct {
 	Value [][]int
