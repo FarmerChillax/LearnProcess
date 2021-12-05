@@ -2,6 +2,21 @@ syntax = "proto3";
 
 message FistMessage {
     int32 id = 1;
-    string name = 2;
-    bool is_male = 3;
+    // version 2 add a new field 'name', tag: 2
+    // string name = 2;
+
+    // version 3, 删除tag为2的字段
+    // 在删除掉字段后，还需要使用 reserved 来标记tag与字段名
+    // 或者使用 OBSOLETE
+    // string OBSOLETE_name = 2;
+    reserved 2;
+    reserved "name";
 }
+
+// A(版本2)用新版本FirstMessage 发送消息给 B(B的版本是1)
+// A: version-2 -> B: version-1
+// 此时新增的字段，B会ignore掉。如上面version 2 新增的 name 字段
+
+// 旧版本发送给新版本
+// A: version-2 <- B: version-1
+// A读取B发送的消息时 name 则是一个空值
