@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option go_package = "pb/";
+
+import "protos/enums.proto";
+// import "google/protobuf/timestamp.proto";
+
+
+
+message Employee {
+    int32 id = 1;
+    int32 no = 2;
+    string firstName = 3;
+    string lastName = 4;
+
+    MonthSalary monthSalary = 6;
+    EmployeeStatus status = 7;
+    
+
+    reserved 5;
+    reserved "salary";
+
+}
+
+message MonthSalary {
+
+}
