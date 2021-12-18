@@ -17,3 +17,4 @@ func TestAddStrings(t *testing.T) {
 		log.Fatalln("not match, result:", result)
 	}
 }
+ 
