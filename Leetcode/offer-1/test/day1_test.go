@@ -7,7 +7,7 @@ import (
 
 func TestSub1(t *testing.T) {
 	expect := 3
-	queue := day1.QueueConstructor()
+	queue := day1.Constructor()
 	queue.AppendTail(expect)
 	res := queue.DeleteHead()
 	if res != expect {

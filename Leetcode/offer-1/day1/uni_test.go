@@ -17,23 +17,23 @@ func TestStackQueue(t *testing.T) {
 	// 1
 	queue.AppendTail(233)
 	result := queue.DeleteHead()
-	excepted := 233
-	handleErr(result, excepted)
+	expected := 233
+	handleErr(result, expected)
 	// 2
 	result = queue.DeleteHead()
-	excepted = -1
-	handleErr(result, excepted)
+	expected = -1
+	handleErr(result, expected)
 	// 3
 	queue.AppendTail(123)
 	queue.AppendTail(233)
 	queue.AppendTail(666)
 	result = queue.DeleteHead()
-	excepted = 123
-	handleErr(result, excepted)
+	expected = 123
+	handleErr(result, expected)
 }
 
-func handleErr(result, excepted interface{}) {
-	if result != excepted {
-		log.Fatalf("not match, result: %v; except: %v\n", result, excepted)
+func handleErr(result, expected interface{}) {
+	if result != expected {
+		log.Fatalf("not match, result: %v; expected: %v\n", result, expected)
 	}
 }
