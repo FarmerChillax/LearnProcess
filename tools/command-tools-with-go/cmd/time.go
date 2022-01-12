@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"command-tools-with-go/internal/timer"
-	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -43,9 +42,8 @@ var calculateTimeCmd = &cobra.Command{
 		if calculateTime == "" {
 			currentTimer = timer.GetNowTime()
 		} else {
-			fmt.Println(currentTimer)
 			var err error
-			space := strings.Count(calculateTime, " ")
+			space := strings.Count(calculateTime, ":")
 			if space == 0 {
 				layout = "2006-01-02"
 			}
