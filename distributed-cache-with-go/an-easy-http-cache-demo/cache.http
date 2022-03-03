@@ -1,0 +1,21 @@
+@hostname = localhost
+@port = 233
+@host = {{hostname}}:{{port}}
+@url = http://{{host}}
+@key = key-1
+@value = value-233
+
+### get cache server status
+GET {{url}}/status HTTP/1.1
+
+### set cache value
+PUT {{url}}/cache/{{key}} HTTP/1.1
+
+{{value}}
+
+
+### get cache value
+GET {{url}}/cache/{{key}} HTTP/1.1
+
+### del cache value
+DELETE {{url}}/cache/{{key}} HTTP/1.1
