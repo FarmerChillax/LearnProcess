@@ -15,10 +15,13 @@ func main() {
 		ctx.String(http.StatusOK, "hello, %s\n", ctx.Query("name"))
 	})
 
-	app.POST("/login", func(ctx *fin.Context) {
+	app.GET("/hello/:name", func(ctx *fin.Context) {
+		ctx.String(http.StatusOK, "Hello %s, your're at %s\n", ctx.Param("name"), ctx.Path)
+	})
+
+	app.GET("/assets/*filepath", func(ctx *fin.Context) {
 		ctx.JSON(http.StatusOK, fin.H{
-			"username": ctx.PostForm("username"),
-			"password": ctx.PostForm("password"),
+			"filepath": ctx.Param("filepath"),
 		})
 	})
 

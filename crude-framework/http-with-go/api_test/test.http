@@ -13,3 +13,10 @@ POST {{endpoint}}/login HTTP/1.1
     "username": "farmer",
     "password": "farmer"
 }
+
+### get hell api
+GET {{endpoint}}/hello/farmer HTTP/1.1 
+
+
+### get with path
+GET {{endpoint}}/assets/js/index.js HTTP/1.1

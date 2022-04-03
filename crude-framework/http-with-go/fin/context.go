@@ -14,8 +14,14 @@ type Context struct {
 	r *http.Request
 	// 请求信息
 	Path, Method string
+	Params       map[string]string
 	// 响应信息
 	StatusCode int
+}
+
+func (c *Context) Param(key string) string {
+	value, _ := c.Params[key]
+	return value
 }
 
 func newContext(w http.ResponseWriter, r *http.Request) *Context {
