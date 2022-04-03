@@ -1,0 +1,15 @@
+@endpoint = http://127.0.0.1:5000
+### get index
+GET {{endpoint}} HTTP/1.1
+
+
+### get by query string
+GET {{endpoint}}/hello?name=farmer HTTP/1.1
+
+### user formdata post with login
+POST {{endpoint}}/login HTTP/1.1
+
+{
+    "username": "farmer",
+    "password": "farmer"
+}
