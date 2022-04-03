@@ -16,7 +16,11 @@ func main() {
 	})
 
 	app.GET("/hello/:name", func(ctx *fin.Context) {
-		ctx.String(http.StatusOK, "Hello %s, your're at %s\n", ctx.Param("name"), ctx.Path)
+		ctx.String(
+			http.StatusOK,
+			"Hello %s, your're at %s\n",
+			ctx.Param("name"), ctx.Path,
+		)
 	})
 
 	app.GET("/assets/*filepath", func(ctx *fin.Context) {

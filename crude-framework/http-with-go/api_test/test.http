@@ -20,3 +20,25 @@ GET {{endpoint}}/hello/farmer HTTP/1.1
 
 ### get with path
 GET {{endpoint}}/assets/js/index.js HTTP/1.1
+
+
+### get index
+GET {{endpoint}}/index HTTP/1.1
+
+
+# group version
+### get v1 api
+GET {{endpoint}}/v1/ HTTP/1.1
+
+
+### get v1 api /hello
+GET {{endpoint}}/v1/hello?name=farmer HTTP/1.1
+
+### get v2 api
+GET {{endpoint}}/v2/hello/farmer HTTP/1.1
+
+### post v2 login
+POST {{endpoint}}/v2/login HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+username=farmer&password=farmer-pwd
