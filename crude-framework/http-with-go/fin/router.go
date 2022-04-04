@@ -54,20 +54,23 @@ func (r *router) getRoute(method, path string) (*node, map[string]string) {
 	}
 
 	// 开始搜索路由
-	n := root.search(searchParts, 0)
+	node := root.search(searchParts, 0)
 
-	if n != nil {
-		parts := parsePattern(n.pattern)
+	if node != nil {
+		parts := parsePattern(node.pattern)
 		for index, part := range parts {
 			if part[0] == ':' {
+				// 如果这一级路由是 : 开头，则表示为路由参数
+				// params[注册的变量名] = 变量内容
 				params[part[1:]] = searchParts[index]
 			}
 			if part[0] == '*' && len(part) > 1 {
+				// 如果是*开头，则表明为全匹配(后面都为变量内容)
 				params[part[1:]] = strings.Join(searchParts[index:], "/")
 				break
 			}
 		}
-		return n, params
+		return node, params
 	}
 	return nil, nil
 
@@ -75,12 +78,16 @@ func (r *router) getRoute(method, path string) (*node, map[string]string) {
 
 func (r *router) handle(c *Context) {
 
-	n, params := r.getRoute(c.Method, c.Path)
-	if n != nil {
+	node, params := r.getRoute(c.Method, c.Path)
+	if node != nil {
+		key := c.Method + "-" + node.pattern
 		c.Params = params
-		key := c.Method + "-" + n.pattern
-		r.handlers[key](c)
+		c.handlers = append(c.handlers, r.handlers[key])
+		// r.handlers[key](c)
 	} else {
-		c.String(http.StatusNotFound, "404 NOT FOUND: %s\n", c.Path)
+		c.handlers = append(c.handlers, func(ctx *Context) {
+			c.String(http.StatusNotFound, "404 NOT FOUND: %s\n", c.Path)
+		})
 	}
+	c.Next()
 }

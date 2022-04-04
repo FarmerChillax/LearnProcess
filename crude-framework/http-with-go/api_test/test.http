@@ -42,3 +42,7 @@ POST {{endpoint}}/v2/login HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 
 username=farmer&password=farmer-pwd
+
+
+### get panic
+GET {{endpoint}}/panic HTTP/1.1
