@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
+	"runtime"
 )
 
 // done 接收通知退出信号
@@ -59,5 +61,20 @@ func GenerateInt(done chan struct{}) chan int {
 }
 
 func main() {
-	// 创建一个作为接收退出
+	// 创建一个作为接收退出信号的 chan
+	done := make(chan struct{}, 0)
+
+	// start generate
+	ch := GenerateInt(done)
+
+	fmt.Println("Now goroutine number:", runtime.NumGoroutine())
+
+	// 消费者消费
+	for i := 0; i < 10; i++ {
+		fmt.Println(<-ch)
+	}
+
+	// 通知生产者停止生产
+	done <- struct{}{}
+	fmt.Println("stop generate", runtime.NumGoroutine())
 }
