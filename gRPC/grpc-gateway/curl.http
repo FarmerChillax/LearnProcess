@@ -1,0 +1,12 @@
+### test
+POST https://127.0.0.1:50052/hello_world HTTP/1.1
+
+
+{"referer": "Hello "}
+
+### swagger-ui
+GET https://127.0.0.1:50052/swagger-ui/ HTTP/1.1
+
+
+### swagger
+GET https://127.0.0.1:50052/swagger/hello.swagger.json HTTP/1.1
