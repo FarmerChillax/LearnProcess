@@ -1,0 +1,5 @@
+@endpoint = http://127.0.0.1:5000
+
+
+### get ping
+GET {{endpoint}}/ping HTTP/1.1
