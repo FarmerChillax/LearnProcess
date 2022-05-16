@@ -2,6 +2,7 @@ package functions
 
 import (
 	"math/rand"
+	"strings"
 	"time"
 )
 
@@ -21,6 +22,14 @@ func Concat(n int) string {
 		s += randomString(n)
 	}
 	return s
+}
+
+func ConcatWithBuilder(n int) string {
+	var s strings.Builder
+	for i := 0; i < n; i++ {
+		s.WriteString(randomString(n))
+	}
+	return s.String()
 }
 
 func Generate(n int) []int {
