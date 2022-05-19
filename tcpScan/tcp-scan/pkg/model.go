@@ -1,24 +1,21 @@
 package pkg
 
 import (
-	"fmt"
 	"net"
 	"time"
 )
 
 type Task struct {
-	Host    string
-	Port    string
-	Timeout time.Duration
-	Status  bool
-	Error   error
+	Endpoint string
+	Timeout  time.Duration
+	Status   bool
+	Error    error
 }
 
-func NewTask(host, port string, timeout ...time.Duration) *Task {
+func NewTask(endpoint string, timeout ...time.Duration) *Task {
 	task := &Task{
-		Host:    host,
-		Port:    port,
-		Timeout: time.Second * 1,
+		Endpoint: endpoint,
+		Timeout:  time.Second * 1,
 	}
 	if len(timeout) > 0 {
 		task.Timeout = timeout[0]
@@ -27,8 +24,7 @@ func NewTask(host, port string, timeout ...time.Duration) *Task {
 }
 
 func (t *Task) Do() error {
-	address := fmt.Sprintf("%s:%s", t.Host, t.Port)
-	conn, err := net.DialTimeout("tcp", address, t.Timeout)
+	conn, err := net.DialTimeout("tcp", t.Endpoint, t.Timeout)
 	if err != nil {
 		return err
 	}
