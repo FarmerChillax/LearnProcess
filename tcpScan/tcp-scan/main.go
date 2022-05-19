@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-	"strings"
 	"tcp-scan/pkg"
 	"time"
 
@@ -13,17 +11,28 @@ var TIMEOUT = 1 * time.Second
 
 func main() {
 	defer profile.Start(profile.MemProfile, profile.MemProfileRate(1)).Stop()
-	// 读取环境变量配置
-	segmentList := []string{"10", "9", "10"}
 	// 加载环境变量
-	segment := pkg.CreateSegment(segmentList...)
-	fmt.Println(segment)
-	// segmentChan := make(chan string, 20)
-	str := "%d.%d.%d.%d"
-	fmt.Println(strings.HasSuffix(str, "%d"))
+	// ...
+	// 得到A-D网段
+	segmentList := []string{"10", "9", "10"}
+	// 开始创建扫描任务
+	// ...
+
+	// test-debug
+	// segment := pkg.CreateSegment(segmentList...)
+	// fmt.Println(segment)
+	// // segmentChan := make(chan string, 20)
+	// str := "%d.%d.%d.%d"
+	// fmt.Println(strings.HasSuffix(str, "%d"))
 }
 
-func CreateTasks(segment, start, end string, taskChan chan<- pkg.Task) {}
+func Create(segments []string) {
+
+}
+
+func CreateTasks(start, end int, taskChan chan<- pkg.Task, segments ...string) {
+
+}
 
 func InitTask(endpoint string, taskChan chan<- pkg.Task, timeout ...time.Duration) {
 	task := pkg.NewTask(endpoint, timeout...)
