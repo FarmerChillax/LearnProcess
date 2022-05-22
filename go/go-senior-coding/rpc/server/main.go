@@ -21,11 +21,13 @@ func main() {
 		log.Fatal("ListenTCP error:", err)
 	}
 
-	conn, err := listener.Accept()
-	if err != nil {
-		log.Fatal("Accept error:", err)
-	}
+	for {
+		conn, err := listener.Accept()
+		if err != nil {
+			log.Fatal("Accept error:", err)
+		}
 
-	rpc.ServeConn(conn)
+		go rpc.ServeConn(conn)
+	}
 
 }
