@@ -19,7 +19,7 @@ func (hs *HelloService) Hello(request string, reply *string) error {
 
 func main() {
 	go func() {
-		log.Println("pprof star in :5122")
+		log.Println("pprof star in http://localhost:5122/debug/pprof")
 		http.ListenAndServe(":5122", nil)
 	}()
 	rpc.RegisterName("HelloService", new(HelloService))
@@ -46,6 +46,7 @@ func main() {
 }
 
 func StartService(ctx context.Context, listener net.Listener) {
+	var count int32
 	for {
 		select {
 		case <-ctx.Done():
@@ -57,6 +58,9 @@ func StartService(ctx context.Context, listener net.Listener) {
 			}
 
 			go rpc.ServeConn(conn)
+			count++
+			log.Println("RPC Service accept a connect, total connect:", count)
+
 		}
 	}
 }
