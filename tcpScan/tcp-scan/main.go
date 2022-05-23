@@ -1,6 +1,8 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"tcp-scan/pkg"
 	"time"
 
@@ -13,8 +15,16 @@ func main() {
 	defer profile.Start(profile.MemProfile, profile.MemProfileRate(1)).Stop()
 	// 加载环境变量
 	// ...
+	segmentA := flag.String("a", "192", "网段A")
+	segmentB := flag.String("b", "%d", "网段B")
+	segmentC := flag.String("c", "%d", "网段C")
+	segmentD := flag.String("d", "%d", "网段D")
+	flag.Parse()
+	args := flag.Args()
+	fmt.Println(args)
+	fmt.Println(*segmentA, *segmentB, *segmentC, *segmentD)
 	// 得到A-D网段
-	segmentList := []string{"10", "9", "10"}
+	// segmentList := []string{"10", "9", "10"}
 	// 开始创建扫描任务
 	// ...
 
