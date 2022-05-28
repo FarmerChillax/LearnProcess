@@ -8,6 +8,7 @@ import (
 	"net/http"
 	_ "net/http/pprof"
 	"net/rpc"
+	"rpc-service-advance/service"
 )
 
 type HelloService struct{}
@@ -19,12 +20,13 @@ func (hs *HelloService) Hello(request string, reply *string) error {
 
 func main() {
 	go func() {
-		log.Println("pprof star in :5122")
+		log.Println("pprof star in http://localhost:5122/debug/pprof")
 		http.ListenAndServe(":5122", nil)
 	}()
-	rpc.RegisterName("HelloService", new(HelloService))
 
-	listener, err := net.Listen("tcp", ":9980")
+	service.RegisterHelloService(new(service.HelloService))
+
+	listener, err := net.Listen("tcp", ":1234")
 	if err != nil {
 		log.Fatal("ListenTCP error:", err)
 	}
@@ -33,7 +35,7 @@ func main() {
 
 	go func() {
 		var input string
-		log.Println("RPC Service running in :9980 ...")
+		log.Println("RPC Service running in :1234 ...")
 		log.Println("Enter anything to cancel.")
 		fmt.Scanln(&input)
 		cancel()
@@ -46,6 +48,7 @@ func main() {
 }
 
 func StartService(ctx context.Context, listener net.Listener) {
+	var count int32
 	for {
 		select {
 		case <-ctx.Done():
@@ -57,6 +60,9 @@ func StartService(ctx context.Context, listener net.Listener) {
 			}
 
 			go rpc.ServeConn(conn)
+			count++
+			log.Println("RPC Service accept a connect, total connect:", count)
+
 		}
 	}
 }

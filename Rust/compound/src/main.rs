@@ -51,3 +51,7 @@ fn five() -> i32 {
 fn plus_five(x: i32) -> i32 {
     x + 5
 }
+
+fn plus_six(x: i32) -> i32 {
+    x + 6
+}
