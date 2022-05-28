@@ -18,3 +18,9 @@ func CreateSegment(fields ...string) string {
 	}
 	return segment
 }
+
+func CreateSegmentTest(segments []string) {
+	if len(segments) == 0 {
+		return
+	}
+}

@@ -14,23 +14,9 @@ func main() {
 	// 加载环境变量
 	// ...
 	// 得到A-D网段
-	segmentList := []string{"10", "9", "10"}
+	segmentList := []string{"10", "9", "8"}
 	// 开始创建扫描任务
 	// ...
-
-	// test-debug
-	// segment := pkg.CreateSegment(segmentList...)
-	// fmt.Println(segment)
-	// // segmentChan := make(chan string, 20)
-	// str := "%d.%d.%d.%d"
-	// fmt.Println(strings.HasSuffix(str, "%d"))
-}
-
-func Create(segments []string) {
-
-}
-
-func CreateTasks(start, end int, taskChan chan<- pkg.Task, segments ...string) {
 
 }
 
