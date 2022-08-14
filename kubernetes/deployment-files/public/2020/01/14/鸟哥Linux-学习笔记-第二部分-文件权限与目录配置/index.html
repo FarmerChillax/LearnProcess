@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>鸟哥Linux-学习笔记-第二部分-文件权限与目录配置 | Farmer</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1.0"><link rel="stylesheet" type="text/css" href="/css/dark.css?v=1.1.0"><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pure/2.1.0/pure-min.min.css"><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pure/2.1.0/grids-responsive-min.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + 'b9d3811fb8d19b04438737cb71b15c9e';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"><div class="darkmode-toggle">🌓</div><script>var prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+var toggle = document.querySelector('.darkmode-toggle');
+var html = document.querySelector('html');
+
+html.dataset.dark = localStorage.dark || prefersDarkMode.matches;
+
+toggle.addEventListener('click', () => {
+localStorage.dark = !(html.dataset.dark == 'true');
+html.dataset.dark = localStorage.dark;
+});</script><meta name="generator" content="Hexo 4.2.1"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">鸟哥Linux-学习笔记-第二部分-文件权限与目录配置</h1><a id="logo" href="/.">Farmer</a><p class="description">-Farmer的自习室</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/readings/"><i class="fa fa-bookmark"> 阅读清单</i></a><a href="/history/"><i class="fa fa-book"> 历史</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">鸟哥Linux-学习笔记-第二部分-文件权限与目录配置</h1><div class="post-meta">2020-01-14<span> | </span><span class="category"><a href="/categories/%E5%AD%A6%E4%BA%86%E4%BA%9B%E4%BB%80%E4%B9%88/">学了些什么</a></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-clock-o"></i><span class="post-count"> 3</span><span class="post-meta-item-text"> 分钟</span></span></span></div><div class="post-content"><p>上一章讲的主要是Linux的历史与硬件相关的点，看起来就像看小说，看得有点快。<br>快过年了，目前就先咕一段时间吧，咕咕咕~ ~ ·</p>
+<a id="more"></a>
+
+<h2 id="1-0-Linux用户与用户组"><a href="#1-0-Linux用户与用户组" class="headerlink" title="1.0 Linux用户与用户组"></a>1.0 Linux用户与用户组</h2><h3 id="1-1-用户与用户组"><a href="#1-1-用户与用户组" class="headerlink" title="1.1 用户与用户组"></a>1.1 用户与用户组</h3><ol>
+<li>文件拥有者(owner)  </li>
+<li>用户组的概念  <ul>
+<li>对各个用户分成各个组别  </li>
+<li>每个账号都可以由多个用户组的支持  </li>
+</ul>
+</li>
+<li>其他人的概念(Others)  <ul>
+<li>在群组之外的  </li>
+</ul>
+</li>
+<li>万能的天神–root  <h3 id="1-2-Linux文件属性"><a href="#1-2-Linux文件属性" class="headerlink" title="1.2 Linux文件属性"></a>1.2 Linux文件属性</h3></li>
+<li>在Linux里，任何一个文件都具有用户(User)、所属群组(Group)、以及其他人(Others)三种身份的个别权限  </li>
+<li>默认情况下  <ul>
+<li>所有账号包括root的相关信息都记录在 <code>/etc/passwd</code> 这个文件内</li>
+<li>密码信息记录在 <code>/etc/shadow</code> 这个文件中</li>
+<li>Linux所有组别都记录在 <code>/etc/group</code> 中  <h2 id="2-0-Linux-文件属性"><a href="#2-0-Linux-文件属性" class="headerlink" title="2.0 Linux 文件属性"></a>2.0 Linux 文件属性</h2>以Linux中一个重要的命令为例 <code>ls -al</code> ，输入后会出现以下内容  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">root@Ubuntu#</span><span class="bash"> ls -al</span></span><br><span class="line">-rw-r--r--.     1       root        root        1864    May 4 18:01          initial-setup-ks.cfg</span><br><span class="line">drwxr-xr-x.     3       root        root        17      May 6 00:14          .config</span><br><span class="line">[文件类型权限] [链接数]  [文件拥有者] [所属用户组] [大小] [文件最后被修改的时间] [文件名]</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><strong>第一栏代表文件的类型及权限</strong>  <ul>
+<li>第一个字符代表这个文件是目录、文件或链接文件等  <ul>
+<li>当为[d]则是目录  </li>
+<li>当为[-]则是文件</li>
+<li>若是[b]则表示为设备文件里面的可供存储的周边设备  </li>
+<li>若是[c]则表示为设备文件里面的串行端口设备  </li>
+</ul>
+</li>
+<li>接下来的字符中，以三个为一组，且均为[rwx]的三个参数的组合  <ul>
+<li>其中[r]代表可读(read)、[w]表示科协(write)、[x]表示可执行(execute)</li>
+<li>这三个权限的位置不会变、如果没用权限，就会出现[-]  </li>
+</ul>
+</li>
+<li>第一组为文件拥有者可具备的权限  </li>
+<li>第二组为加入此用户组的账号的权限  </li>
+<li>第三组为非本人且没用加入本用户组的其他账号的权限; </li>
+</ul>
+</li>
+<li>第二栏表示这个文件又多少文件名链接到此节点  </li>
+<li>第三栏表示这个文件的所属用户组  </li>
+<li>第五栏表示文件的容量大小，默认单位Bytes  </li>
+<li>第六栏为这个文件的创建日期或最近修改日期  </li>
+<li>第七栏位文件名  </li>
+</ul>
+<h3 id="2-1-修改文件属性与权限"><a href="#2-1-修改文件属性与权限" class="headerlink" title="2.1 修改文件属性与权限"></a>2.1 修改文件属性与权限</h3><p>常用于用户组、拥有者、各种身份的权限修改的命令  </p>
+<ul>
+<li><code>chgrp</code>: 修改文件所属用户组；</li>
+<li><code>chown</code>：修改文件拥有者；</li>
+<li><code>chmod</code>：修改文件的权限，SUID、SGID、SBIT等特性  </li>
+</ul>
+<ol>
+<li><p>修改所属用户组，chgrp  </p>
+<ul>
+<li>chgrp-&gt; change group 缩写  </li>
+<li><code>chgrp [-R] dirname/filename ...</code><ul>
+<li>-R：进行递归修改，即连同子目录下的所有文件，目录都更新成为这个用户组之意  </li>
+</ul>
+</li>
+<li>修改的用户组需要在/etc/group 内。  </li>
+</ul>
+</li>
+<li><p>修改文件拥有者，chown  </p>
+<ul>
+<li>chown-&gt; change owner </li>
+<li>用户必须是存在系统中的账号，也就是/etc/passwd 这个文件中有记录的用户名才能修改  </li>
+<li><code>chown [-R] 账号名称 文件或目录</code></li>
+<li><code>chown [-R] 账号名称:用户组名称 文件或目录</code><ul>
+<li>-R 进行递归修改</li>
+</ul>
+</li>
+<li>实例 <code>chown bin test.c</code></li>
+<li>实例 <code>chown root:root test.c</code> </li>
+</ul>
+</li>
+<li><p>修改文件权限 chmod<br>修改权限的方法有两种，分别可以使用数字或是符号来进行权限修改  </p>
+<ul>
+<li>数字类型修改文件权限<br>Linux文件的基本权限就有9个，分别是拥有者（owner）、所属群组（group）、其他人（others）三种身份对应的读（read）、写（write）、执行（execute）权限  <ul>
+<li>各权限的数字对照表如下:<blockquote>
+<p>r：4<br>w：2<br>x：1</p>
+</blockquote>
+</li>
+<li>每种身份（owner、group、others）鸽子的三个权限（r、w、x）数字是需要累加的，例如当权限为：[-rwxrwx—] 数字则是：<blockquote>
+<p>owner = rwx = 4+2+1 = 7<br>Group = rwx = 4+2+1 = 7<br>others = - - - = 0+0+0 = 0  </p>
+</blockquote>
+</li>
+<li>所以我们设置该文件的权限数字就是770，修改命令chmod的语法：<br><code>chmod [-R] xyz 文件或目录</code>  <ul>
+<li>xyz：就是数字类型的权限属性，为rwx属性数字相加  </li>
+<li>-R：递归修改  </li>
+</ul>
+</li>
+<li>实例 <code>chmod 777 test.c</code>  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</div><div id="donate"><link rel="stylesheet" type="text/css" href="/css/donate.css"><script type="text/javascript" src="/js/donate.js" successtext="复制成功!"></script><a class="pos-f tr3" id="github" href="https://github.com/farmerChillax" target="_blank" rel="noopener" arget="_blank" title="Github"></a><div id="DonateText">Donate</div><ul class="list pos-f" id="donateBox"><li id="AliPay" qr="/img/AliPayQR.jpg"></li><li id="WeChat" qr="/img/WeChatQR.jpg"></li></ul><div class="pos-f left-100" id="QRBox"><div id="MainBox"></div></div></div><script type="text/javascript" src="/js/share.js?v=1.1.0" async></script><a class="article-share-link" data-url="https://blog.farmer233.top/2020/01/14/%E9%B8%9F%E5%93%A5Linux-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE/" data-id="cl3kx4b1n0055md32hhp1hepo" data-qrcode="data:image/png;base64,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">分享</a><div class="tags"><a href="/tags/Linux/"><i class="fa fa-tag"></i>Linux</a><a href="/tags/%E7%AC%94%E8%AE%B0/"><i class="fa fa-tag"></i>笔记</a></div><div class="post-nav"><a class="pre" href="/2020/02/26/python%E5%AE%9E%E7%8E%B0%E9%98%BF%E9%87%8C%E4%BA%91%E5%8A%A8%E6%80%81%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%9C%8D%E5%8A%A1DDNS/">python实现阿里云动态域名解析服务DDNS</a><a class="next" href="/2020/01/07/%E9%B8%9F%E5%93%A5Linux-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86/">鸟哥Linux-学习笔记-第一部分</a></div><div id="container"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/gitalk/dist/gitalk.css?v=1.1.0"><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=1.1.0"></script><script type="text/javascript" src="//unpkg.com/gitalk/dist/gitalk.min.js?v=1.1.0"></script><script>var gitalk = new Gitalk({
+  clientID: '0a5a339e4c6a3cc81b76',
+  clientSecret: 'ce2b79ca94465b2a758faca9e0b95e4df38d6204',
+  repo: 'FarmerChillax.github.io',
+  owner: 'FarmerChillax',
+  admin: ['FarmerChillax'],
+  id: md5(location.pathname),
+  distractionFreeMode: false
+})
+gitalk.render('container')
+</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%BA%86%E4%BA%9B%E4%BB%80%E4%B9%88/">学了些什么</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%9E%E4%BA%8B%E6%83%85/">搞事情</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%83%A1%E6%80%9D%E4%B9%B1%E8%AF%AD/">胡思乱语</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Golang/" style="font-size: 15px;">Golang</a> <a href="/tags/%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%AD/" style="font-size: 15px;">胡言乱语</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" style="font-size: 15px;">计算机网络基础</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 15px;">笔记</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 15px;">爬虫</a> <a href="/tags/%E6%AD%A3%E6%96%B9%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/" style="font-size: 15px;">正方教务系统</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/CTF/" style="font-size: 15px;">CTF</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 15px;">C语言</a> <a href="/tags/%E5%88%B7%E9%A2%98/" style="font-size: 15px;">刷题</a> <a href="/tags/PTA/" style="font-size: 15px;">PTA</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 15px;">前端</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">算法和数据结构</a> <a href="/tags/leetcode/" style="font-size: 15px;">leetcode</a> <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 15px;">位运算</a> <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" style="font-size: 15px;">哈希表</a> <a href="/tags/Sliding-Window/" style="font-size: 15px;">Sliding Window</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 15px;">链表</a> <a href="/tags/DDNS/" style="font-size: 15px;">DDNS</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/" style="font-size: 15px;">生活记录</a> <a href="/tags/%E5%90%90%E6%A7%BD/" style="font-size: 15px;">吐槽</a> <a href="/tags/%E9%BB%91%E6%9A%97%E6%96%99%E7%90%86/" style="font-size: 15px;">黑暗料理</a> <a href="/tags/TypeScript/" style="font-size: 15px;">TypeScript</a> <a href="/tags/vs-code/" style="font-size: 15px;">vs code</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 15px;">插件</a> <a href="/tags/Flask-APIFlask/" style="font-size: 15px;">Flask/APIFlask</a> <a href="/tags/emotion/" style="font-size: 15px;">emotion</a> <a href="/tags/Rust/" style="font-size: 15px;">Rust</a> <a href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" style="font-size: 15px;">蓝桥杯</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/03/15/%E7%94%9F%EF%BC%8C%E6%B4%BB/">生，活</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/09/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E7%94%A8APIFlask%E5%81%9A%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF/">手把手教你用APIFlask做毕业设计后端—基本简介与Hello APIFlask!(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/15/%E7%94%A8Rust%E4%B8%BAPython%E5%8A%A0%E5%8F%8C%E7%BF%85%E8%86%80/">用Rust为Python加双翅膀</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E7%A7%8B%E6%8B%9B%E6%9D%82%E8%B0%88/">校招杂谈</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/07/Review-of-life-in-university/">Review of life in university ✔</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/05/A-distributed-with-Go/">A distributed system with Go</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/03/%E6%96%B0%E7%89%88%E6%AD%A3%E6%96%B9%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F%E7%99%BB%E5%BD%95%E5%AE%9E%E7%8E%B0/">新版正方教务系统登录实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/20/Golang%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/">Golang基础语法笔记 | 数组、切片&映射</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/07/%E6%8F%90%E9%97%AE%E4%B8%AD%E9%9C%80%E8%A6%81%E9%81%BF%E5%85%8D%E7%9A%84%E4%B8%80%E4%BA%9B%E8%A1%8C%E4%B8%BA/">提问中需要避免的一些行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/02/Leetcode-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%A2%98%E7%9B%AE%E9%9B%86%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9/">[Leetcode]数据结构题目集的最后一天</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://blog.xiaotao233.top/" title="咸鱼的窝" target="_blank">咸鱼的窝</a><ul></ul><a href="https://blog.diyxi.top/" title="DIY，熙!" target="_blank">DIY，熙!</a><ul></ul><a href="https://darkroom.vip/" title="Dark的小黑屋" target="_blank">Dark的小黑屋</a><ul></ul><a href="https://blog.ziki2333.top/" title="ziki" target="_blank">ziki</a><ul></ul><a href="https://blog.feldan.top/" title="feldan" target="_blank">feldan</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2022 <a href="/." rel="nofollow">Farmer.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.1.0" async></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=1.1.0" async></script><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.1.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.1.0"></script></div></body></html>

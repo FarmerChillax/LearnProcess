@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>手把手教你用APIFlask做毕业设计后端—基本简介与Hello APIFlask!(一) | Farmer</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1.0"><link rel="stylesheet" type="text/css" href="/css/dark.css?v=1.1.0"><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pure/2.1.0/pure-min.min.css"><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pure/2.1.0/grids-responsive-min.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + 'b9d3811fb8d19b04438737cb71b15c9e';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"><div class="darkmode-toggle">🌓</div><script>var prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+var toggle = document.querySelector('.darkmode-toggle');
+var html = document.querySelector('html');
+
+html.dataset.dark = localStorage.dark || prefersDarkMode.matches;
+
+toggle.addEventListener('click', () => {
+localStorage.dark = !(html.dataset.dark == 'true');
+html.dataset.dark = localStorage.dark;
+});</script><meta name="generator" content="Hexo 4.2.1"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">手把手教你用APIFlask做毕业设计后端—基本简介与Hello APIFlask!(一)</h1><a id="logo" href="/.">Farmer</a><p class="description">-Farmer的自习室</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/readings/"><i class="fa fa-bookmark"> 阅读清单</i></a><a href="/history/"><i class="fa fa-book"> 历史</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">手把手教你用APIFlask做毕业设计后端—基本简介与Hello APIFlask!(一)</h1><div class="post-meta">2022-03-09<span> | </span><span class="category"><a href="/categories/%E5%AD%A6%E4%BA%86%E4%BA%9B%E4%BB%80%E4%B9%88/">学了些什么</a></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 4.1k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-clock-o"></i><span class="post-count"> 14</span><span class="post-meta-item-text"> 分钟</span></span></span></div><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#系列文章"><span class="toc-number">1.</span> <span class="toc-text">系列文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#写在前面"><span class="toc-number">2.</span> <span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初识APIFlask-Hello-APIFlask"><span class="toc-number">3.</span> <span class="toc-text">初识APIFlask(Hello APIFlask)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#快速开始"><span class="toc-number">3.1.</span> <span class="toc-text">快速开始</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建应用实例-application-对象"><span class="toc-number">3.2.</span> <span class="toc-text">创建应用实例(application 对象)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注册路由"><span class="toc-number">3.3.</span> <span class="toc-text">注册路由</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-绑定多个URL"><span class="toc-number">3.3.1.</span> <span class="toc-text">1. 绑定多个URL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-动态URL"><span class="toc-number">3.3.2.</span> <span class="toc-text">2. 动态URL</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动开发服务器"><span class="toc-number">3.4.</span> <span class="toc-text">启动开发服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动发现程序实例"><span class="toc-number">3.5.</span> <span class="toc-text">自动发现程序实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#管理环境变量"><span class="toc-number">3.6.</span> <span class="toc-text">管理环境变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#扩展阅读"><span class="toc-number">4.</span> <span class="toc-text">扩展阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置热更新-重载器"><span class="toc-number">4.1.</span> <span class="toc-text">配置热更新(重载器)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建虚拟环境"><span class="toc-number">4.2.</span> <span class="toc-text">创建虚拟环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#激活虚拟环境"><span class="toc-number">4.3.</span> <span class="toc-text">激活虚拟环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更多启动项"><span class="toc-number">4.4.</span> <span class="toc-text">更多启动项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#彩蛋"><span class="toc-number">5.</span> <span class="toc-text">彩蛋</span></a></li></ol></div></div><div class="post-content"><!-- **『注：本文更新于2022年3月15日』** -->
+
+
+<blockquote>
+<p>前言: 由于本人是根据<a href="https://helloflask.com/book/1/" target="_blank" rel="noopener">《Flask Web 开发实战 》</a>一书进行总结、扩展、引申。因此可能存在重复内容，但已取得本书作者许可😀<br>另外本文提及的APIFlask框架也是本书的作者写的, 十分建议购买阅读<br>本文项目对应地存储库: <a href="https://github.com/Farmer-chong/HelloAPIFlask" target="_blank" rel="noopener">https://github.com/Farmer-chong/HelloAPIFlask</a></p>
+</blockquote>
+<p>最近正值毕业阶段，相信许多人的毕业设计都无不例外的选择了Web相关的内容，毕竟这个比较容易实现。我发现许多人都出于从众心理无不例外的使用了Spring全家桶，Spring有着很庞大的生态、久远的历史以及很丰富的社区资料，这使得它被许多从业者使用。但也正是这些优势导致它对新手或者快速上手开发变得十分不好，再加之国内的毒瘤技术社区等原因，使得一个小问题往往需要花费大量的时间来排除错误的答案。</p>
+<p>相比于繁重、学习成本较高的Spring，Flask其简单的语法可以是我们快速的上手完成(应对)毕设这一类学业任务, 因此本文仅停留在 <strong>能用</strong> 阶段, 更多底层原理需要读者自行了解(这里推荐一下李大的狗书<a href="https://helloflask.com/book/1/" target="_blank" rel="noopener">《Flask Web 开发实战 》</a>) 另外出于为社区做贡献等情怀原因也是写这一系列的初衷。</p>
+<h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><ol>
+<li><a href="./">后端系列: 基本简介与Hello APIFlask! (一)</a><!-- 2.  -->
+
+</li>
+</ol>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><blockquote>
+<p>本文默认使用Windows进行开发，Linux/macOS会特别说明</p>
+</blockquote>
+<blockquote>
+<p>相比于传统的后端渲染模板架构，本文采用目前主流的前后端分离结构</p>
+</blockquote>
+<p>对于前后端分离，服务端只需要提供API接口来处理请求。简单的来说就是前端不再局限于浏览器，还可以是app、小程序亦或者是爬虫程序。对后端而言，我们不再渲染html返回给前端，而是与前端共同约定一个数据格式进行交互。</p>
+<p>如果读者的思想还停留在具体的浏览器中，那需要读者打开思维的局限来理解。无论是传统的后端渲染还是前后端分离，其本质都是操作 <strong>HTTP报文</strong> 。</p>
+<blockquote>
+<p>许多人此时会有个疑问：为什么一会儿Flask一会APIFlask的，这两者有什么关系？</p>
+</blockquote>
+<p>先来简单的说一下，<code>Flask</code>是一个十分流行的 <strong>Python Web</strong> 框架。而<code>APIFlask</code>则是基于<code>Flask</code>框架针对 <strong>Web API</strong>开发的特点二次开发的框架，这是一个针对API而生的框架(或者具体点前后端分离)。如果读者有<code>Java</code>开发经验，可以理解类似于<code>Spring</code>与<code>Spring Boot</code>的关系。</p>
+<p>扩展阅读: </p>
+<ol>
+<li><a href="https://greyli.com/hello-apiflask/" target="_blank" rel="noopener">APIFlask是什么</a></li>
+<li><a href="https://greyli.com/flask-fastapi/" target="_blank" rel="noopener">Flask、APIFlask与其他Web框架之间的关系</a></li>
+</ol>
+<p><em>因为APIFlask是一个Flask的扩展补充框架，因此它大部分都是与Flask保持一致的，你甚至可以把APIFlask当成Flask来写(当然这并不推荐)。因此对Flask有经验的读者许多内容是可以跳过阅读的，我甚至更推荐你去阅读 <a href="https://apiflask.com/" target="_blank" rel="noopener">APIFlask的官方文档</a>。</em></p>
+<h2 id="初识APIFlask-Hello-APIFlask"><a href="#初识APIFlask-Hello-APIFlask" class="headerlink" title="初识APIFlask(Hello APIFlask)"></a>初识APIFlask(Hello APIFlask)</h2><p>废话放在后面说，作为快速上手教程，理所应当地先来个Hello World感受一下<code>Flask</code>的魅力，作为一篇保姆级教程下面就让从<code>pip</code>这个包管理器开始安装一下<code>APIFlask</code>吧（默认安装好python及其包管理器）</p>
+<h3 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h3><p>小白的话就直接运行下面这条命令即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install apiflask # Linux环境用pip3</span><br></pre></td></tr></table></figure>
+
+<p>当然本人还是强烈建议使用虚拟环境哈。细节就不多赘述了，下面开始写一个Hello World吧:</p>
+<figure class="highlight python"><figcaption><span>hello/app.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> apiflask <span class="keyword">import</span> APIFlask</span><br><span class="line">app = APIFlask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello apiflask!'</span></span><br></pre></td></tr></table></figure>
+
+<p>哪怕你没有开发经验，单纯的看单词也许已经猜到它是做什么了，下面就来一步步的分解这个程序。</p>
+<h3 id="创建应用实例-application-对象"><a href="#创建应用实例-application-对象" class="headerlink" title="创建应用实例(application 对象)"></a>创建应用实例(application 对象)</h3><p>我们使用<code>pip</code>安装<strong>apiflask</strong>，其实也就是下载了一个叫<strong>apiflask</strong>的包。因此我们可以通过<strong>apiflask</strong>包的构造文件导入开发的类和函数。我们一开始从<strong>apiflask</strong>包导入<strong>APIFlask</strong>类，实例化这个类，就得到了我们的程序实例<code>app</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> apiflask <span class="keyword">import</span> APIFlask</span><br><span class="line">app = APIFlask(__name__)</span><br></pre></td></tr></table></figure>
+
+<p>传入<strong>apiflask</strong>的第一个参数是模块或者包名词，这里使用Python的特殊变量<code>__name__</code>。</p>
+<h3 id="注册路由"><a href="#注册路由" class="headerlink" title="注册路由"></a>注册路由</h3><blockquote>
+<p>首先对于很多初学者来说都会有这么一个问题：<strong>路由是什么？</strong></p>
+</blockquote>
+<p>回答这个问题之前我们先来看看一个传统的Web应用，客户端和服务器上的程序是如何交互的:</p>
+<ol>
+<li>用户在浏览器输入URL访问某个资源</li>
+<li>APIFlask接收用户请求并分析请求的URL</li>
+<li>APIFlask为这个URL找到对应的处理函数</li>
+<li>执行函数并生成响应，然后返回给浏览器</li>
+<li>浏览器接收并解析响应</li>
+</ol>
+<p>而我们现在要做前后端分离，整个流程和上面是一致的，但客户端具体的对象则从浏览器变成了一段发起 http 请求的代码，以网页前后端分离为例稍微完善一下如下:</p>
+<ol>
+<li>前端使用AJAX向后端发起请求</li>
+<li>APIFlask接收请求并分析请求的URL</li>
+<li>APIFlask为这个URL找到对应的处理函数</li>
+<li>执行函数并生成 HTTP 响应</li>
+<li>AJAX接收响应</li>
+<li>根据后续的业务代码进行页面的修改</li>
+</ol>
+<blockquote>
+<p><em>⚠⚠注意⚠⚠</em> 这里的 <strong>AJAX</strong> 是指 <strong>Asynchronous JavaScript + XML（异步JavaScript和XML）</strong> 这是一个技术名词，读者需要注意与较多人熟知的<code>jQuery</code>库的<code>ajax</code>方法进行区分！！！<br>简单的来讲，<code>jQuery</code>的<code>ajax</code>是 <strong>AJAX</strong> 技术的一个实现，有着许多同类的替代品，比如<code>axios</code>。由于笔者见过太多的人将两者混淆，故在此着重强调。</p>
+</blockquote>
+<p>这些步骤中，大部分都是由APIFlask完成，我们只需要将<strong>处理函数与URL对应起来</strong>。只需在函数添加<code>app.route()</code>装饰器，并传入URL规则作为参数，就可以让URL与函数建立关系。这个过程我们称为注册路由(route)，路由复制管理URL和函数之间的映射，而这个函数则被称为视图函数(view function)。</p>
+<h4 id="1-绑定多个URL"><a href="#1-绑定多个URL" class="headerlink" title="1. 绑定多个URL"></a>1. 绑定多个URL</h4><p>一个视图函数可以绑定多个URL，具体就像下面这段代码:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="meta">@app.route('/hello')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello apiflask!'</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-动态URL"><a href="#2-动态URL" class="headerlink" title="2. 动态URL"></a>2. 动态URL</h4><p>我们还可以在URL规则中添加变量部分, 使用<code>&lt;变量名&gt;</code>的形式表示。APIFlask处理请求时会把变量传入视图函数，代码如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/hello/&lt;name&gt;')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">(name:str)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">f'Hello <span class="subst">&#123;name&#125;</span>!'</span></span><br></pre></td></tr></table></figure>
+
+<p>如果URL变量中包含变量，但如果又要适配没有变量的情况，比如与多个URL配合起来使用，那么我们可以给一个默认值:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/hello', defaults=&#123;'name': 'farmer'&#125;)</span></span><br><span class="line"><span class="meta">@app.route('/hello/&lt;name&gt;')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">say_hello</span><span class="params">(name:str)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">f'Hello <span class="subst">&#123;name&#125;</span>!'</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="启动开发服务器"><a href="#启动开发服务器" class="headerlink" title="启动开发服务器"></a>启动开发服务器</h3><p>Flask内置了一个开发服务器(由依赖包Werkzeug)提供，足够在开发和测试阶段使用，而APIFlask是基于Flask二次开发的，因此我们一样可以使用。</p>
+<blockquote>
+<p>在生产环境需要使用性能够好的生产服务器，以提升安全和性能，具体更多内容移步到<a href="https://helloflask.com/book/1/" target="_blank" rel="noopener">《Flask Web 开发实战 》</a></p>
+</blockquote>
+<p>在项目的<strong>根目录</strong>下，输入下面这条命令:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flask run</span><br></pre></td></tr></table></figure>
+
+<p>然后我们会看到如下输出:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">* Tip: There are .env or .flaskenv files present. Do "pip install python-dotenv" to use them.</span><br><span class="line">* Environment: production</span><br><span class="line">  WARNING: This is a development server. Do not use it in a production deployment.</span><br><span class="line">  Use a production WSGI server instead.</span><br><span class="line">* Debug mode: off</span><br><span class="line">* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)</span><br></pre></td></tr></table></figure>
+
+<p>这时候我们在浏览器访问这个URL，会看到这样显示:</p>
+<img src="/2022/03/09/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E7%94%A8APIFlask%E5%81%9A%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF/index.png" class="" title="hello_apiflask">
+
+<p>同理，其他URL自行替换即可得到相应的结果。但由于我们开发的是前后端分离架构，后端只负责提供API进行访问，除了基本的<code>GET</code>请求外还有大量其他请求报文。因为浏览器的调试无疑是不够的，为此<code>APIFlask</code>提供了交互式API文档(基于<strong>Swagger UI</strong> and <strong>Redoc</strong>)</p>
+<p>要进入这个交互式API文档，默认的方式是访问<code>/docs</code>路由，为此我们重新在浏览器访问: <a href="http://127.0.0.1:5000/docs，即可看到下面的这个页面" target="_blank" rel="noopener">http://127.0.0.1:5000/docs，即可看到下面的这个页面</a>:</p>
+<img src="/2022/03/09/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E7%94%A8APIFlask%E5%81%9A%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF/swagger.png" class="" title="api_docs">
+
+<p>后续都会基于该API文档进行演示，当然你也可以访问: <a href="http://127.0.0.1:5000/redoc" target="_blank" rel="noopener">http://127.0.0.1:5000/redoc</a> 查看基于Redoc生成的API文档。</p>
+<blockquote>
+<p>需要注意，网上许多教程都是通过<code>app.run()</code>形式来运行开发服务器的，这种方式其实是旧的启动方式，已经过时了目前已不推荐使用(deprecated)。</p>
+</blockquote>
+<p>Flask通过依赖包Click内置了一个CLI(Command Line Interface, 命令行交互界面)系统。当我们安装Flask后，会自动添加一个flask命令脚本，我们可以通过flask命令执行内置命令、扩展插件的命令与我们自定义的命令。其中，<code>flask run</code>命令用来启动开发服务器。</p>
+<p>此外，你还可以执行<code>flask --help</code>查看所有命令，这些命令都需要在项目的根目录执行。</p>
+<h3 id="自动发现程序实例"><a href="#自动发现程序实例" class="headerlink" title="自动发现程序实例"></a>自动发现程序实例</h3><p>上面启动开发服务器我们使用了<code>flask run</code>来启动，这就不禁让人好奇，<strong>Flask</strong>是如何找到程序的？</p>
+<p>其实这个问题是因为<strong>Flask</strong>会自动探测程序实例，一般来说，在执行<code>flask run</code>命令运行程序前，我们需要提供程序实例所在模块的位置，而自动探测是按照下面这些规则:</p>
+<ol>
+<li>从当前目录寻找<code>app.py</code>和<code>wsgi.py</code>模块，并从中寻找名为<code>app</code>或<code>application</code>的程序实例</li>
+<li>从环境变量<strong>FLASK_APP</strong>对应的模块名/导入路径寻找名为<code>app</code>或<code>application</code>的程序实例</li>
+</ol>
+<p>因为我们上面的程序代码文件名为<code>app.py</code>，所以<code>flask run</code>命令会自动在其中寻找应用实例。如果你的程序文件名是其他名称，比如<code>hello_apiflask.py</code>，那么需要设置环境变量<strong>FLASK_APP</strong>，将包含程序实例的模块名赋值给这个变量。命令如下:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">set</span> <span class="attribute">FLASK_APP</span>=hello_apiflask</span><br></pre></td></tr></table></figure>
+
+<p>Linux或macOS系统使用<code>export</code>命令:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export FLASK_APP=hello_apiflask</span><br></pre></td></tr></table></figure>
+
+<h3 id="管理环境变量"><a href="#管理环境变量" class="headerlink" title="管理环境变量"></a>管理环境变量</h3><p><strong>FLASK</strong>的自动发现程序实例机制还有第三条规则: 如果安装了<strong>python-dotenv</strong>，那么在使用<code>flask run</code>或其他命令时会自动使用它从<code>.flaskenv</code>文件和<code>.env</code>文件中加载环境变量。</p>
+<p>安装<strong>python-dotenv</strong>包命令如下:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install python-dotenv # Linux环境用pip3</span><br></pre></td></tr></table></figure>
+
+<p>除了管理自动发现程序实例外，我们还可以用来管理程序需要的环境变量。我们在项目根目录下分别创建两个文件:<code>.env</code>和<code>.flaskenv</code>，其中<code>.flaskenv</code>用来管理和<strong>Flask</strong>相关的公开环境变量。而<code>.env</code>文件则用来管理包含敏感信息的环境变量。</p>
+<blockquote>
+<p><code>.env</code>包含敏感信息，除非是私有项目，否则绝对不能提交到Git仓库中</p>
+</blockquote>
+<h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><blockquote>
+<p>为什么写扩展阅读，扩展阅读的作用?</p>
+</blockquote>
+<p>扩展阅读模块主要是对上面的内容进行补充，内容并非必读内容并不会影响程序的运行，更多是补充开发相关各方面的知识内容。</p>
+<h3 id="配置热更新-重载器"><a href="#配置热更新-重载器" class="headerlink" title="配置热更新(重载器)"></a>配置热更新(重载器)</h3><p>开发环境(development environment)和生产环境(production environment)。根据运行环境的不同，<strong>Flask</strong>程序、扩展以及其他程序会改变相应的行为和设置。为了区分运行环境，<strong>Flask</strong>提供了一个<strong>FLASK_ENV</strong>环境变量用来设置环境，默认为<code>production</code>(生产)。在开发时我们可以将其设置为<code>development</code>，这会开启所有支持开发的特性，为了方便管理我们还可以将其写入到<code>.flaskenv</code>文件中:</p>
+<figure class="highlight shell"><figcaption><span>./.flaskenv</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLASK_ENV=development</span><br></pre></td></tr></table></figure>
+<p>现在启动程序，你会看到下面的输出提示:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(env) E:\Github\HelloAPIFlask\demos\hello&gt;flask run</span><br><span class="line"> * Environment: development</span><br><span class="line"> * Debug mode: on</span><br><span class="line"> * Restarting with stat</span><br><span class="line"> * Debugger is active!</span><br><span class="line"> * Debugger PIN: 500-487-380</span><br><span class="line"> * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)</span><br></pre></td></tr></table></figure>
+
+<p>在开发环境下，调试模式(Debug Mode)将被开启，这时执行<code>flask run</code>启动程序会自动激活<strong>Werkzeug</strong>内置的调试器(debugger)和重载器(reloader)，他们会为开发带来很大的帮助。</p>
+<p><strong>如果你想单独控制调试模式开关，可以通过FLASK_DEBUG环境变量来设置，设为1为开启，设为0则关闭，不过通常不推荐手动设置这个值</strong></p>
+<h3 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h3><blockquote>
+<p>在 Python 中，虚拟环境(virtual enviroment)就是隔离的 Python 解释器环境。通过创建虚拟环境，你可以拥有一个独立的 Python 解释器环境。这样做的好处是可以为每一个项目创建独立的 Python 解释器环境，因为不同的项目经常会依赖不同版本的库或Python版本。使用虚拟环境可以保持全局 Python 解释器环境的干净，避免包和版本的混乱，并且可以方便地区分和记录每个项目的依赖，以便在新环境下复现依赖环境。</p>
+</blockquote>
+<p>虚拟环境通常使用<strong>Virtualenv</strong>来创建，除此之外还有<strong>Pipenv</strong>、<strong>PDM</strong>等诸多环境管理工具。简单起见，我们使用<strong>Python3</strong>自带的工具来创建虚拟环境，首先确保我们当前工作目录在项目的根目录，然后使用<code>python3 -m venv env</code>命令为当前项目创建虚拟环境:</p>
+<figure class="highlight shell"><figcaption><span>Windows</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m venv env</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><figcaption><span>Linux</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m venv env</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示: Windows用户可直接复制，但Linux系统大多存在python2与python3，Linux用户需要注意这点</strong></p>
+<p>这会在当前目录创建一个名为<strong>env</strong>的文件夹(命令最后一个选项为文件夹名)，其中包含隔离的Python解释器环境。</p>
+<h3 id="激活虚拟环境"><a href="#激活虚拟环境" class="headerlink" title="激活虚拟环境"></a>激活虚拟环境</h3><p>在创建虚拟环境后，我们还需要载入(激活)这个环境，接下来使用<code>.\env\Script\active</code>来激活虚拟环境:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">E:\Github\HelloAPIFlask&gt;.\env\Scripts\activate</span><br><span class="line"></span><br><span class="line">(env) E:\Github\HelloAPIFlask&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Linux环境使用<code>source</code>命令来激活:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">farmer@farmer-ubuntu:~/HelloAPIFlask$ source ./env/bin/activate</span><br><span class="line"></span><br><span class="line">(env) farmer@farmer-ubuntu:~/HelloAPIFlask$ source ./env/bin/activate</span><br></pre></td></tr></table></figure>
+
+
+<p>可以看到虚拟环境激活后命令行前面多了一个虚拟环境的标识，这就表示虚拟环境激活啦！使用<code>pip list</code>我们可以看到该环境是一个全新的环境。</p>
+<h3 id="更多启动项"><a href="#更多启动项" class="headerlink" title="更多启动项"></a>更多启动项</h3><ol>
+<li>使服务器外部可见<br>我们上面启动的Web服务器默认是对外不可见的，我们可以通过<code>--host</code>选项将主机地址改为<code>0.0.0.0</code>使其对外部可见:<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flask run --host=0.0.0.0</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p>需要注意这里的外部是指你计算机外部，并不是指公网。一般个人的电脑是没有公网IP(公有地址)，所以此时你的程序只能被局域网内的其他用户通过你电脑的IP(内网)进行访问。</p>
+</blockquote>
+<ol start="2">
+<li>改变默认端口</li>
+</ol>
+<p><strong>Flask</strong>提供的Web服务器默认监听5000端口，你可以通过<code>--port</code>选项进行更改:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flask run --port=2333</span><br></pre></td></tr></table></figure>
+<p>此时会监听来自2333端口的请求，对应的程序网址也变成了 <a href="http://127.0.0.1:2333/。" target="_blank" rel="noopener">http://127.0.0.1:2333/。</a></p>
+<h2 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h2><blockquote>
+<p>这一切开始于2010年4月1日，<strong>Armin Ronacher</strong>在网上发布了一篇关于”下一代 Python 微框架”的介绍文章，文章里称这个 Denied 框架不依赖 Python 标准库，只需要复制一份 <code>deny.py</code> 放到你的项目文件夹就可以开始编程。随着一本正经的介绍、名人推荐语、示例代码和演示视频，这个”虚假“的项目让不少人信以为真。5天后 <strong>Flask</strong> 就从这么一个愚人节玩笑诞生了。</p>
+</blockquote>
+<p>同样的，<strong>APIFlask</strong>这个框架开始于 2021年4月1日，不知道是机缘巧合还是<a href="https://greyli.com/" target="_blank" rel="noopener">Grey Li</a>有意为之的一个小玩笑，<strong>APIFlask</strong>与<strong>Flask</strong>均诞生于4月1日这一天。🎉🚀✨</p>
+<p>在与<a href="https://greyli.com/" target="_blank" rel="noopener">Grey Li</a>求证后得知两者选择同一天发布是有意为之的！！😄</p>
+</div><div id="donate"><link rel="stylesheet" type="text/css" href="/css/donate.css"><script type="text/javascript" src="/js/donate.js" successtext="复制成功!"></script><a class="pos-f tr3" id="github" href="https://github.com/farmerChillax" target="_blank" rel="noopener" arget="_blank" title="Github"></a><div id="DonateText">Donate</div><ul class="list pos-f" id="donateBox"><li id="AliPay" qr="/img/AliPayQR.jpg"></li><li id="WeChat" qr="/img/WeChatQR.jpg"></li></ul><div class="pos-f left-100" id="QRBox"><div id="MainBox"></div></div></div><script type="text/javascript" src="/js/share.js?v=1.1.0" async></script><a class="article-share-link" data-url="https://blog.farmer233.top/2022/03/09/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E7%94%A8APIFlask%E5%81%9A%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF/" data-id="cl3kx4b1a003zmd32e3oi85yt" data-qrcode="data:image/png;base64,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">分享</a><div class="tags"><a href="/tags/python/"><i class="fa fa-tag"></i>python</a><a href="/tags/%E7%AC%94%E8%AE%B0/"><i class="fa fa-tag"></i>笔记</a><a href="/tags/web/"><i class="fa fa-tag"></i>web</a><a href="/tags/Flask-APIFlask/"><i class="fa fa-tag"></i>Flask/APIFlask</a></div><div class="post-nav"><a class="pre" href="/2022/03/15/%E7%94%9F%EF%BC%8C%E6%B4%BB/">生，活</a><a class="next" href="/2022/01/15/%E7%94%A8Rust%E4%B8%BAPython%E5%8A%A0%E5%8F%8C%E7%BF%85%E8%86%80/">用Rust为Python加双翅膀</a></div><div id="container"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/gitalk/dist/gitalk.css?v=1.1.0"><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=1.1.0"></script><script type="text/javascript" src="//unpkg.com/gitalk/dist/gitalk.min.js?v=1.1.0"></script><script>var gitalk = new Gitalk({
+  clientID: '0a5a339e4c6a3cc81b76',
+  clientSecret: 'ce2b79ca94465b2a758faca9e0b95e4df38d6204',
+  repo: 'FarmerChillax.github.io',
+  owner: 'FarmerChillax',
+  admin: ['FarmerChillax'],
+  id: md5(location.pathname),
+  distractionFreeMode: false
+})
+gitalk.render('container')
+</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%BA%86%E4%BA%9B%E4%BB%80%E4%B9%88/">学了些什么</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%9E%E4%BA%8B%E6%83%85/">搞事情</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%83%A1%E6%80%9D%E4%B9%B1%E8%AF%AD/">胡思乱语</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Golang/" style="font-size: 15px;">Golang</a> <a href="/tags/%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%AD/" style="font-size: 15px;">胡言乱语</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" style="font-size: 15px;">计算机网络基础</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 15px;">笔记</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 15px;">爬虫</a> <a href="/tags/%E6%AD%A3%E6%96%B9%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/" style="font-size: 15px;">正方教务系统</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/CTF/" style="font-size: 15px;">CTF</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 15px;">C语言</a> <a href="/tags/%E5%88%B7%E9%A2%98/" style="font-size: 15px;">刷题</a> <a href="/tags/PTA/" style="font-size: 15px;">PTA</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 15px;">前端</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">算法和数据结构</a> <a href="/tags/leetcode/" style="font-size: 15px;">leetcode</a> <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 15px;">位运算</a> <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" style="font-size: 15px;">哈希表</a> <a href="/tags/Sliding-Window/" style="font-size: 15px;">Sliding Window</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 15px;">链表</a> <a href="/tags/DDNS/" style="font-size: 15px;">DDNS</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/" style="font-size: 15px;">生活记录</a> <a href="/tags/%E5%90%90%E6%A7%BD/" style="font-size: 15px;">吐槽</a> <a href="/tags/%E9%BB%91%E6%9A%97%E6%96%99%E7%90%86/" style="font-size: 15px;">黑暗料理</a> <a href="/tags/TypeScript/" style="font-size: 15px;">TypeScript</a> <a href="/tags/vs-code/" style="font-size: 15px;">vs code</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 15px;">插件</a> <a href="/tags/Flask-APIFlask/" style="font-size: 15px;">Flask/APIFlask</a> <a href="/tags/emotion/" style="font-size: 15px;">emotion</a> <a href="/tags/Rust/" style="font-size: 15px;">Rust</a> <a href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" style="font-size: 15px;">蓝桥杯</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/03/15/%E7%94%9F%EF%BC%8C%E6%B4%BB/">生，活</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/09/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E7%94%A8APIFlask%E5%81%9A%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF/">手把手教你用APIFlask做毕业设计后端—基本简介与Hello APIFlask!(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/15/%E7%94%A8Rust%E4%B8%BAPython%E5%8A%A0%E5%8F%8C%E7%BF%85%E8%86%80/">用Rust为Python加双翅膀</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E7%A7%8B%E6%8B%9B%E6%9D%82%E8%B0%88/">校招杂谈</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/07/Review-of-life-in-university/">Review of life in university ✔</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/05/A-distributed-with-Go/">A distributed system with Go</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/03/%E6%96%B0%E7%89%88%E6%AD%A3%E6%96%B9%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F%E7%99%BB%E5%BD%95%E5%AE%9E%E7%8E%B0/">新版正方教务系统登录实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/20/Golang%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/">Golang基础语法笔记 | 数组、切片&映射</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/07/%E6%8F%90%E9%97%AE%E4%B8%AD%E9%9C%80%E8%A6%81%E9%81%BF%E5%85%8D%E7%9A%84%E4%B8%80%E4%BA%9B%E8%A1%8C%E4%B8%BA/">提问中需要避免的一些行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/02/Leetcode-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%A2%98%E7%9B%AE%E9%9B%86%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9/">[Leetcode]数据结构题目集的最后一天</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://blog.xiaotao233.top/" title="咸鱼的窝" target="_blank">咸鱼的窝</a><ul></ul><a href="https://blog.diyxi.top/" title="DIY，熙!" target="_blank">DIY，熙!</a><ul></ul><a href="https://darkroom.vip/" title="Dark的小黑屋" target="_blank">Dark的小黑屋</a><ul></ul><a href="https://blog.ziki2333.top/" title="ziki" target="_blank">ziki</a><ul></ul><a href="https://blog.feldan.top/" title="feldan" target="_blank">feldan</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2022 <a href="/." rel="nofollow">Farmer.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.1.0" async></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=1.1.0" async></script><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.1.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.1.0"></script></div></body></html>

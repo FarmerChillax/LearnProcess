@@ -1,0 +1,224 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>鸟哥Linux-学习笔记-第一部分 | Farmer</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1.0"><link rel="stylesheet" type="text/css" href="/css/dark.css?v=1.1.0"><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pure/2.1.0/pure-min.min.css"><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pure/2.1.0/grids-responsive-min.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + 'b9d3811fb8d19b04438737cb71b15c9e';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"><div class="darkmode-toggle">🌓</div><script>var prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+var toggle = document.querySelector('.darkmode-toggle');
+var html = document.querySelector('html');
+
+html.dataset.dark = localStorage.dark || prefersDarkMode.matches;
+
+toggle.addEventListener('click', () => {
+localStorage.dark = !(html.dataset.dark == 'true');
+html.dataset.dark = localStorage.dark;
+});</script><meta name="generator" content="Hexo 4.2.1"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">鸟哥Linux-学习笔记-第一部分</h1><a id="logo" href="/.">Farmer</a><p class="description">-Farmer的自习室</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/readings/"><i class="fa fa-bookmark"> 阅读清单</i></a><a href="/history/"><i class="fa fa-book"> 历史</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">鸟哥Linux-学习笔记-第一部分</h1><div class="post-meta">2020-01-07<span> | </span><span class="category"><a href="/categories/%E5%AD%A6%E4%BA%86%E4%BA%9B%E4%BB%80%E4%B9%88/">学了些什么</a></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1.2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-clock-o"></i><span class="post-count"> 4</span><span class="post-meta-item-text"> 分钟</span></span></span></div><div class="post-content"><p>接触Linux已经好几年了，一直都没有系统的学习过相关知识。虽然也叫会用，但对Linux还是很多遗漏的知识点，这个寒假目前还不知道干什么好，索性就系统的学习一下Linux吧。</p>
+<a id="more"></a>
+<h2 id="0-0-Linux学习要点"><a href="#0-0-Linux学习要点" class="headerlink" title="0.0 Linux学习要点"></a>0.0 Linux学习要点</h2><ol>
+<li>计算机概论与硬件相关知识</li>
+<li>先从Linux的安装与命令学起<ul>
+<li>安装一个自己喜欢的Linux</li>
+</ul>
+</li>
+<li>Linux操作系统的基础概念  <ul>
+<li>“用户、用户组的概念”、“权限的观念”、“程序的定义”等</li>
+<li><strong>权限的概念</strong>尤为重要</li>
+</ul>
+</li>
+<li>务必学会vi文本编辑器</li>
+<li>shell与shell脚本的学习</li>
+<li>一定要会软件管理</li>
+<li>网络基础的建立<ul>
+<li>ip概念与路由概念</li>
+</ul>
+</li>
+<li>选择一本易读的工具书（自己喜欢！）  </li>
+</ol>
+<h2 id="0-1-主机与磁盘"><a href="#0-1-主机与磁盘" class="headerlink" title="0.1 主机与磁盘"></a>0.1 主机与磁盘</h2><h3 id="0-1-0-硬件设备"><a href="#0-1-0-硬件设备" class="headerlink" title="0.1.0 硬件设备"></a>0.1.0 硬件设备</h3><ol>
+<li><p>每个设备都被当成文件来对待  :clap:</p>
+<table>
+<thead>
+<tr>
+<th>设备</th>
+<th>Linux中的文件名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SCSI、sata、USB等</td>
+<td>sd[a-p]</td>
+</tr>
+<tr>
+<td>U盘-&gt; 同SCSI设备</td>
+<td>sd[a-p]</td>
+</tr>
+<tr>
+<td>虚拟接口（virtio接口）</td>
+<td>vd[a-p]（虚拟机）</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>MBR(MS-DOS、主引导记录)与GPT磁盘分区表(partition table)</p>
+<ol>
+<li>MBR(Master Boot Record) 早期磁盘第一个扇区里面含有的重要信息。</li>
+<li>GPR(GUID partition table) 近年来磁盘的容量扩大，某些操作系统无法存取，因此新出的一种磁盘分区格式。</li>
+<li>为什么早期Linux使用MBR分区？<ul>
+<li>早期的Linux为了兼容Windows的磁盘，所以使用MBR.</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>MBR分区 </p>
+<ul>
+<li>主要分区与扩展分区一共最多有4个（硬盘限制）  </li>
+<li>扩展分区最多只能有一个（操作系统限制）；  </li>
+<li>逻辑分区是由扩展分区持续划分出来的分区；  </li>
+<li>能够被格式化后作为数据存取的分区是主要分区与逻辑分区，扩展分区无法格式化；</li>
+<li>逻辑分区的数量依赖操作系统而不同，在Linux中SATA硬盘已经可以突破63个以上的分区限制。</li>
+<li>如果扩展分区被破坏，所有逻辑分区将会被删除。</li>
+</ul>
+</li>
+<li><p>MBR分区表的限制  </p>
+<ul>
+<li>操作系统无法使用2.2TB以上的硬盘；  </li>
+<li>MBR仅有一个区块，被破坏后，经常无法或很难恢复；  </li>
+<li>MBR内的存放启动引导程序的区块仅有446字节，无法存储较多的程序代码。  </li>
+</ul>
+</li>
+<li><p>GPT分区  :+1:</p>
+<ol>
+<li>出现的原因<ul>
+<li>兼容所有的硬盘</li>
+<li>现在新出的4K扇区设计</li>
+</ul>
+</li>
+<li>逻辑区块地址-&gt; LBA（Logical Block Address）<ul>
+<li>LBA0（MBR兼容区块）</li>
+<li>LBA1（GPT表头记录）</li>
+<li>LBA2-33（实际记录分区信息）<h3 id="0-1-1-启动流程中的BIOS与UEFI启动检查程序"><a href="#0-1-1-启动流程中的BIOS与UEFI启动检查程序" class="headerlink" title="0.1.1 启动流程中的BIOS与UEFI启动检查程序"></a>0.1.1 启动流程中的BIOS与UEFI启动检查程序</h3></li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><strong>BIOS与CMOS</strong></p>
+<ul>
+<li>BIOS是固件，是一个写入到主板上的固件  </li>
+<li>CMOS是记录各项硬件参数且嵌入在主板上的存储器  </li>
+</ul>
+</li>
+<li><p>启动流程  </p>
+<ol>
+<li>BIOS：启动主动执行的固件，会识别第一个可启动的设备  </li>
+<li>MBR：第一个可启动设备的第一个扇区内的主引导记录块，内含有启动引导代码  </li>
+<li>启动引导程序： 一个可读取内核文件来执行的软件  </li>
+<li>内核文件：开始启动操作系统  </li>
+</ol>
+</li>
+<li><p>UEFI中加入了安全启动（secure boot）功能</p>
+<blockquote>
+<p>这个功能代表着即将启动的操作系统必须要被UEFI所验证，否则无法顺利启动<br>这回导致许多操作系统，包括Linux，很可能无法顺利启动。所有有时需要关闭这个功能</p>
+</blockquote>
+<h3 id="0-1-2-磁盘分区"><a href="#0-1-2-磁盘分区" class="headerlink" title="0.1.2 磁盘分区"></a>0.1.2 磁盘分区</h3></li>
+<li><p>目录树结构  </p>
+</li>
+<li><p>挂载（文件系统与目录树的关系）  </p>
+</li>
+<li><p>安装系统与分区  </p>
+</li>
+</ol>
+<h2 id="0-2-Linux的安装"><a href="#0-2-Linux的安装" class="headerlink" title="0.2 Linux的安装"></a>0.2 Linux的安装</h2><h2 id="0-3-首次使用Linux"><a href="#0-3-首次使用Linux" class="headerlink" title="0.3 首次使用Linux"></a>0.3 首次使用Linux</h2><h3 id="0-3-1-课后习题"><a href="#0-3-1-课后习题" class="headerlink" title="0.3.1 课后习题"></a>0.3.1 课后习题</h3><ol>
+<li>安装系统   </li>
+<li>更改桌面分辨率</li>
+<li>修改壁纸  </li>
+<li>修改屏幕锁定时间-&gt;从不  </li>
+<li>修改工作区数量  </li>
+</ol>
+<h2 id="0-4-重要的几个点"><a href="#0-4-重要的几个点" class="headerlink" title="0.4 重要的几个点"></a>0.4 重要的几个点</h2><h3 id="0-4-0-重要的几个热键"><a href="#0-4-0-重要的几个热键" class="headerlink" title="0.4.0 重要的几个热键"></a>0.4.0 重要的几个热键</h3><table>
+<thead>
+<tr>
+<th>热键名称</th>
+<th>热键功能（作用）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[tab]</td>
+<td>命令补全/文件补全</td>
+</tr>
+<tr>
+<td>[Ctrl]-c</td>
+<td>取消/命令中断键</td>
+</tr>
+<tr>
+<td>[Ctrl]-d</td>
+<td>键盘输入的结束（EOF、相当于输入exit）</td>
+</tr>
+<tr>
+<td>[Shift]+{[Page up]|[Page Down]}</td>
+<td>前后翻页</td>
+</tr>
+<tr>
+<td>### 0.4.1 错误信息/日志 的查看</td>
+<td></td>
+</tr>
+<tr>
+<td>1. –help说明</td>
+<td></td>
+</tr>
+<tr>
+<td>2. man（manual、操作说明）</td>
+<td></td>
+</tr>
+<tr>
+<td>- 【空格键】往下翻页</td>
+<td></td>
+</tr>
+<tr>
+<td>- 【q】键离开man环境</td>
+<td></td>
+</tr>
+<tr>
+<td>### 0.4.2 文本编辑器：nano</td>
+<td></td>
+</tr>
+<tr>
+<td>- [Ctrl]- R ：从其他文件读入数据可以将某个文件的内容贴在本文件中</td>
+<td></td>
+</tr>
+<tr>
+<td>- [Ctrl]- W ：查找字符串</td>
+<td></td>
+</tr>
+<tr>
+<td>- [Ctrl]- C ：说明目前光标所在的行数与列数等信息</td>
+<td></td>
+</tr>
+<tr>
+<td>- [Ctrl]- _ ：可以直接输入行号，让光标快速移动到该行</td>
+<td></td>
+</tr>
+<tr>
+<td>- [Alt]- Y ：语法校验功能的开启或关闭</td>
+<td></td>
+</tr>
+<tr>
+<td>- [Alt]- M ：可以支持书本来移动光标等功能</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="0-5-重点笔记-1"><a href="#0-5-重点笔记-1" class="headerlink" title="0.5 重点笔记  :+1:"></a>0.5 重点笔记  :+1:</h2><ul>
+<li>欢迎界面的信息再哪来的？ </li>
+<li>答：<code>/etc/issue</code> </li>
+<li></li>
+</ul>
+</div><div id="donate"><link rel="stylesheet" type="text/css" href="/css/donate.css"><script type="text/javascript" src="/js/donate.js" successtext="复制成功!"></script><a class="pos-f tr3" id="github" href="https://github.com/farmerChillax" target="_blank" rel="noopener" arget="_blank" title="Github"></a><div id="DonateText">Donate</div><ul class="list pos-f" id="donateBox"><li id="AliPay" qr="/img/AliPayQR.jpg"></li><li id="WeChat" qr="/img/WeChatQR.jpg"></li></ul><div class="pos-f left-100" id="QRBox"><div id="MainBox"></div></div></div><script type="text/javascript" src="/js/share.js?v=1.1.0" async></script><a class="article-share-link" data-url="https://blog.farmer233.top/2020/01/07/%E9%B8%9F%E5%93%A5Linux-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86/" data-id="cl3kx4b1l004ymd327goqakxh" data-qrcode="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEe0lEQVR42u3aS27bQBAFQN3/0s42QGLpvW7K0NDFlWHLJKdGQP/m8Yivr7+u55/59/PJ75OnzD7/3Ts83nFhwoQJE6aPZPp6eiWvmL/od/f8jnL/13Y7v70DJkyYMGE6nCm/XR5ukxdKntsmBEnaka8dEyZMmDD9TqY2pWhThHbBedGLCRMmTJgw5YEzSRdm99xs22ZjMGHChAnTXZmS27Ul5WyQ2SYim2L4Lb1wTJgwYcL0YUyzYHyPn99yvgkTJkyYMH0M09fompWmm3RhljTMkoD//BcmTJgwYTqWqQ2is/J1E5I3jeBkC4thJyZMmDBhOpZpM4CcDQjbl943iDcpCCZMmDBhOpepUIyXmpej+fZsCuz2KM8wy8CECRMmTB/JNFtSEoaT4zX7Ars9yrMpjDFhwoQJ04lMeTBuC9HZUHN/YCiJ4/UGYMKECROmY5n2RWm+1Da9aBfTNnPzzcaECRMmTOcy5cG4rqfjZCIvnjcQszQIEyZMmDDdj6ltubZjxbwd3KYdbfFcvAMmTJgwYTqWaRPU8zQiD/x58bw/rFOPPzFhwoQJ07FMeau3bZXmA852ULppJa+AMGHChAnTUUxtIZoH9Tz0tinFrCXdNpcxYcKECdM9mNrHzMaTP883SzuiVWDChAkTpgOZNreYDUTbYngz1GzL6aixiwkTJkyYDmRqU4H2wM0MYpaIXLs9mDBhwoTpdKb2GE0OVE9TyyfmBfAsjcCECRMmTPdg2i+vPS6TLylf3iztGJa+mDBhwoTpKKb84M7s0EyC1f587ZsUh4QwYcKECdPtmPLGaxv+82ftG8ezZ2HChAkTptOZ9qXmu5utyQGj9x33wYQJEyZM92DKX+jaBc+K0k3juP0kJkyYMGE6nSlfQEuZBOO8tM6bufmwM09lMGHChAnT6UxXdYvzsJq3ffcDyHw7i28QJkyYMGE6hGn2z/nQcda0TZ47S1yGSQYmTJgwYboFU37T2WKeB/vNlrQlcft0TJgwYcJ0OlPb3m3DahvU2+C9T2JepCaYMGHChOlYpnzZ+V/zlKI9KpRD7J8+/HZgwoQJE6YPZsoX3xbD+0bwbHS6ST4iLEyYMGHC9PFMzx/QlrJ5OzVHTJ7V/j5Bf9ELx4QJEyZMhzPlQb0N5G3CsWn+5tvz4vOYMGHChOlwpmvbr/tFzoaOs0Zw9EXBhAkTJky3YNo0TNugmx/EaQereUn8yC9MmDBhwnQLpjwJ2BSZ7aC0PTw0K6df/BcmTJgwYTqWqR7slePDnPiqK08X2s3AhAkTJkwnMs1aqG1VuBk65hvW3qEojDFhwoQJ07FMbaBtXysfZ+6HnflWzQ4AYcKECROmc5muOpSTH/rZl9xtIJ8NbjFhwoQJ052Y8sM0m0de1d79+TYxJkyYMGH6DUwzuPy4z6zQbQvgWdKDCRMmTJh+A1NesrYFcFK4blrG+ydiwoQJE6bTmdom776wzA/3tC3mdqQapS+YMGHChOlYplnrc38MNH+hfCza3uHiBjQmTJgwYfospj8Xui/gPF980AAAAABJRU5ErkJggg==">分享</a><div class="tags"><a href="/tags/Linux/"><i class="fa fa-tag"></i>Linux</a><a href="/tags/%E7%AC%94%E8%AE%B0/"><i class="fa fa-tag"></i>笔记</a></div><div class="post-nav"><a class="pre" href="/2020/01/14/%E9%B8%9F%E5%93%A5Linux-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%B8%8E%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE/">鸟哥Linux-学习笔记-第二部分-文件权限与目录配置</a><a class="next" href="/2019/07/23/python%E7%88%AC%E8%99%AB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B1%A1%E6%9F%93/">python爬虫数据库污染</a></div><div id="container"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/gitalk/dist/gitalk.css?v=1.1.0"><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=1.1.0"></script><script type="text/javascript" src="//unpkg.com/gitalk/dist/gitalk.min.js?v=1.1.0"></script><script>var gitalk = new Gitalk({
+  clientID: '0a5a339e4c6a3cc81b76',
+  clientSecret: 'ce2b79ca94465b2a758faca9e0b95e4df38d6204',
+  repo: 'FarmerChillax.github.io',
+  owner: 'FarmerChillax',
+  admin: ['FarmerChillax'],
+  id: md5(location.pathname),
+  distractionFreeMode: false
+})
+gitalk.render('container')
+</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%BA%86%E4%BA%9B%E4%BB%80%E4%B9%88/">学了些什么</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%9E%E4%BA%8B%E6%83%85/">搞事情</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%83%A1%E6%80%9D%E4%B9%B1%E8%AF%AD/">胡思乱语</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Golang/" style="font-size: 15px;">Golang</a> <a href="/tags/%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%AD/" style="font-size: 15px;">胡言乱语</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" style="font-size: 15px;">计算机网络基础</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 15px;">笔记</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 15px;">爬虫</a> <a href="/tags/%E6%AD%A3%E6%96%B9%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/" style="font-size: 15px;">正方教务系统</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/CTF/" style="font-size: 15px;">CTF</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 15px;">C语言</a> <a href="/tags/%E5%88%B7%E9%A2%98/" style="font-size: 15px;">刷题</a> <a href="/tags/PTA/" style="font-size: 15px;">PTA</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 15px;">前端</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">算法和数据结构</a> <a href="/tags/leetcode/" style="font-size: 15px;">leetcode</a> <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 15px;">位运算</a> <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" style="font-size: 15px;">哈希表</a> <a href="/tags/Sliding-Window/" style="font-size: 15px;">Sliding Window</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 15px;">链表</a> <a href="/tags/DDNS/" style="font-size: 15px;">DDNS</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/" style="font-size: 15px;">生活记录</a> <a href="/tags/%E5%90%90%E6%A7%BD/" style="font-size: 15px;">吐槽</a> <a href="/tags/%E9%BB%91%E6%9A%97%E6%96%99%E7%90%86/" style="font-size: 15px;">黑暗料理</a> <a href="/tags/TypeScript/" style="font-size: 15px;">TypeScript</a> <a href="/tags/vs-code/" style="font-size: 15px;">vs code</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 15px;">插件</a> <a href="/tags/Flask-APIFlask/" style="font-size: 15px;">Flask/APIFlask</a> <a href="/tags/emotion/" style="font-size: 15px;">emotion</a> <a href="/tags/Rust/" style="font-size: 15px;">Rust</a> <a href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" style="font-size: 15px;">蓝桥杯</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/03/15/%E7%94%9F%EF%BC%8C%E6%B4%BB/">生，活</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/09/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E7%94%A8APIFlask%E5%81%9A%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF/">手把手教你用APIFlask做毕业设计后端—基本简介与Hello APIFlask!(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/15/%E7%94%A8Rust%E4%B8%BAPython%E5%8A%A0%E5%8F%8C%E7%BF%85%E8%86%80/">用Rust为Python加双翅膀</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E7%A7%8B%E6%8B%9B%E6%9D%82%E8%B0%88/">校招杂谈</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/07/Review-of-life-in-university/">Review of life in university ✔</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/05/A-distributed-with-Go/">A distributed system with Go</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/03/%E6%96%B0%E7%89%88%E6%AD%A3%E6%96%B9%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F%E7%99%BB%E5%BD%95%E5%AE%9E%E7%8E%B0/">新版正方教务系统登录实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/20/Golang%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/">Golang基础语法笔记 | 数组、切片&映射</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/07/%E6%8F%90%E9%97%AE%E4%B8%AD%E9%9C%80%E8%A6%81%E9%81%BF%E5%85%8D%E7%9A%84%E4%B8%80%E4%BA%9B%E8%A1%8C%E4%B8%BA/">提问中需要避免的一些行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/02/Leetcode-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%A2%98%E7%9B%AE%E9%9B%86%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9/">[Leetcode]数据结构题目集的最后一天</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://blog.xiaotao233.top/" title="咸鱼的窝" target="_blank">咸鱼的窝</a><ul></ul><a href="https://blog.diyxi.top/" title="DIY，熙!" target="_blank">DIY，熙!</a><ul></ul><a href="https://darkroom.vip/" title="Dark的小黑屋" target="_blank">Dark的小黑屋</a><ul></ul><a href="https://blog.ziki2333.top/" title="ziki" target="_blank">ziki</a><ul></ul><a href="https://blog.feldan.top/" title="feldan" target="_blank">feldan</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2022 <a href="/." rel="nofollow">Farmer.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.1.0" async></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=1.1.0" async></script><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.1.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.1.0"></script></div></body></html>

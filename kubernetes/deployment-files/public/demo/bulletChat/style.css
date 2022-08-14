@@ -1,0 +1,63 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.barrage {
+    width: 600px;
+}
+
+.barrage .video {
+    position: relative;
+    width: 100%;
+}
+
+.barrage .video video{
+    /* position: relative; */
+    width: 100%;
+}
+
+.barrage .video canvas{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+/* 弹幕发送 */
+.barrage .submit {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    justify-content: center;
+}
+
+.barrage .submit input{
+    width: 500px;
+    outline: 0;
+    padding: 10px;
+    border: 1px solid #e7e7e7;
+}
+
+.barrage .submit button{
+    color: white;
+    outline: 0;
+    border: 0;
+    width: 100px;
+    background: linear-gradient(45deg, #016eff 70%, #1296ea);
+    cursor: pointer;
+}
+
+.barrage .submit .btn_active{
+    color: #bbb;
+    background: #e7e7e7;
+    cursor: not-allowed;
+}

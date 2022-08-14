@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(#233, rgb(50, 155, 182));
+        }
+
+        #app {
+            font-size: 48px;
+            color: #fff;
+        }
+
+        .cursor {
+            color: white;
+        }
+
+        .cursor-flash {
+            animation: flash .7s linear infinite;
+        }
+
+        @keyframes flash {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+    <!-- <script src="./vue.min.js"></script> -->
+</head>
+
+<body>
+    <div id="app">
+        <span class="text">
+        </span>
+        <!-- typed-cursor--blink -->
+        <span class="cursor cursor-flash">|</span>
+    </div>
+    <script>
+        const str_input = document.querySelector(".text")
+        let str = "Text cursor Demo!"
+
+        function setTextPrint(value) {
+            return new Promise((resolve, reject) => {
+                setTimeout(e => {
+                    str_input.innerHTML = value
+                    resolve()
+                }, 200)
+            })
+        }
+
+        async function main(flag) {
+            if (flag) {
+                for (let i = 0; i <= str.length; i++) {
+                    await setTextPrint(str.substr(0, i))
+                }
+            } else {
+                for (let i = str.length; i >= 0; i--) {
+                    await setTextPrint(str.substr(0, i))
+                }
+            }
+            
+            setTimeout(() => {
+                main(!flag)
+            }, 700)
+        }
+
+        main(1)
+
+    </script>
+</body>
+
+</html>

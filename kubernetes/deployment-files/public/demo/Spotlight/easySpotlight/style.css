@@ -1,0 +1,44 @@
+*{
+    font-size: 15px;
+}
+
+body{
+    background-color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+h1{
+    color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 8rem;
+    letter-spacing: -0.3rem;
+    position: relative;
+}
+
+h1::after{
+    content: '-Farmer Web Demo';
+    color: yellow;
+    position: absolute;
+    top: 0;
+    left: 0;
+    clip-path: ellipse(100px 100px at 0% 50%);
+    /* -webkit-clip-path: ellipse(100px 100px at 0% 50%); */
+    animation: spotlight 5s infinite ease-in-out;
+}
+
+@keyframes spotlight {
+    0%{
+        clip-path: ellipse(100px 100px at 0% 50%);
+    }
+    50%{
+        clip-path: ellipse(100px 100px at 100% 50%);
+    }
+    100%{
+        clip-path: ellipse(100px 100px at 0% 50%);
+    }
+}

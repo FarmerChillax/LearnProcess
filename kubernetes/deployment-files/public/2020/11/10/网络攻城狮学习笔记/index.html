@@ -1,0 +1,135 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>软考网络攻城狮学习笔记 | Farmer</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1.0"><link rel="stylesheet" type="text/css" href="/css/dark.css?v=1.1.0"><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pure/2.1.0/pure-min.min.css"><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pure/2.1.0/grids-responsive-min.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + 'b9d3811fb8d19b04438737cb71b15c9e';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"><div class="darkmode-toggle">🌓</div><script>var prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+var toggle = document.querySelector('.darkmode-toggle');
+var html = document.querySelector('html');
+
+html.dataset.dark = localStorage.dark || prefersDarkMode.matches;
+
+toggle.addEventListener('click', () => {
+localStorage.dark = !(html.dataset.dark == 'true');
+html.dataset.dark = localStorage.dark;
+});</script><meta name="generator" content="Hexo 4.2.1"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">软考网络攻城狮学习笔记</h1><a id="logo" href="/.">Farmer</a><p class="description">-Farmer的自习室</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/readings/"><i class="fa fa-bookmark"> 阅读清单</i></a><a href="/history/"><i class="fa fa-book"> 历史</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">软考网络攻城狮学习笔记</h1><div class="post-meta">2020-11-10<span> | </span><span class="category"><a href="/categories/%E5%AD%A6%E4%BA%86%E4%BA%9B%E4%BB%80%E4%B9%88/">学了些什么</a></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1.2k</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-clock-o"></i><span class="post-count"> 4</span><span class="post-meta-item-text"> 分钟</span></span></span></div><div class="post-content"><p>前天考完软考-网络攻城狮，写一下笔记趴✌🙌<br>随便记录一下，写的不算好，单纯只是做个笔记以后复习用(自己能看懂就行)</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>互联网可以划分为多个自治系统(autonomous system, AS) ，每个AS内部可以和别的 AS 使用不同的路由选择协议，根据使用的范围差异可以将路由选择协议划分为自治系统内部的协议和自治系统外的协议    </p>
+<h2 id="Web安全"><a href="#Web安全" class="headerlink" title="Web安全"></a>Web安全</h2><p>这次软考下午卷考了一手web安全，常见的sql注入、XSS、一句话木马、Excel宏病毒等等，不过都说些简单问题稍有了解就能答出来。写在前面是因为这东西比较好玩并且有了解过所以在前面记录一下。<br>常见的类型: </p>
+<ul>
+<li>sql注入</li>
+<li>XSS</li>
+<li>一句话木马</li>
+<li>Excel宏病毒</li>
+<li>APT</li>
+<li>DDos</li>
+<li>蠕虫病毒</li>
+</ul>
+<h2 id="RIP-amp-OSPF-路由-Hot"><a href="#RIP-amp-OSPF-路由-Hot" class="headerlink" title="RIP &amp; OSPF 路由(Hot)"></a>RIP &amp; OSPF 路由(Hot)</h2><p><strong>这两个协议都是自治系统内的协议</strong>，只能用于内部网络或者说小型网络    </p>
+<h3 id="rip"><a href="#rip" class="headerlink" title="rip"></a>rip</h3><p>通过邻居获取网络路由，再与自己的路由表合并</p>
+<h3 id="ospf"><a href="#ospf" class="headerlink" title="ospf"></a>ospf</h3><ul>
+<li>寻找邻居</li>
+<li>建立邻接关系</li>
+<li>链路状态信息传递</li>
+<li>计算路由</li>
+</ul>
+<h3 id="两者对比"><a href="#两者对比" class="headerlink" title="两者对比"></a>两者对比</h3><table>
+<thead>
+<tr>
+<th align="center">对比</th>
+<th align="center">rip</th>
+<th align="center">ospf</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">协议对比</td>
+<td align="center">距离矢量协议</td>
+<td align="center">链路状态协议</td>
+</tr>
+<tr>
+<td align="center">传输成本</td>
+<td align="center">开销低</td>
+<td align="center">传输成本好</td>
+</tr>
+<tr>
+<td align="center">实现方式</td>
+<td align="center">计算路由跳数</td>
+<td align="center">洪泛法(向自治系统中的所有路由发送信息)</td>
+</tr>
+<tr>
+<td align="center">时间</td>
+<td align="center">每30s发送一次</td>
+<td align="center">当网络拓扑改变的时候</td>
+</tr>
+<tr>
+<td align="center">跳数限制</td>
+<td align="center">最多15跳(16则不可达)</td>
+<td align="center">没限制</td>
+</tr>
+<tr>
+<td align="center">使用的算法</td>
+<td align="center">距离向量算法</td>
+<td align="center">最短路径算法(Dijkstra)</td>
+</tr>
+<tr>
+<td align="center">适用网络</td>
+<td align="center">小型网络</td>
+<td align="center">大型网络</td>
+</tr>
+<tr>
+<td align="center">ospf的优势</td>
+<td align="center"></td>
+<td align="center">没有跳数限制、可变子网掩码(VESM)、网络规模大、收敛速度快</td>
+</tr>
+<tr>
+<td align="center">ospf中DR的作用范围</td>
+<td align="center"></td>
+<td align="center">一个网段</td>
+</tr>
+</tbody></table>
+<h2 id="广播域-amp-amp-冲突域-Hot"><a href="#广播域-amp-amp-冲突域-Hot" class="headerlink" title="广播域 &amp;&amp; 冲突域(Hot)"></a>广播域 &amp;&amp; 冲突域(Hot)</h2><p>区别:  </p>
+<ul>
+<li>广播域可以跨网段，而冲突域只是发生的同一个网段的。</li>
+<li>冲突域：在同一个冲突域中的每一个节点都能收到所有被发送的帧;</li>
+<li>广播域：网络中能接收任一设备发出的广播帧的所有设备的集合;</li>
+<li>冲突域：基于第一层（物理层）;</li>
+<li>广播域：基于第二层（数据链路层）;</li>
+<li>一个局域网就是一个广播域（往往是指一个IP段内），广播域中的机器可以收到域中其他任何一台机器的播，而不能收到域外机器的广播，域外机器也不能收到域内机器发的广播；</li>
+<li>冲突域：一个站点向另一个站点发出信号。能收到信号的站点就构成一个冲突域。</li>
+<li>集线器（HUB） 所有端口都在同一个广播域，冲突域内。</li>
+</ul>
+<h2 id="DNSの两种查询-Hot"><a href="#DNSの两种查询-Hot" class="headerlink" title="DNSの两种查询(Hot)"></a>DNSの两种查询(Hot)</h2><h3 id="迭代查询-主机向本地域名服务器查询"><a href="#迭代查询-主机向本地域名服务器查询" class="headerlink" title="迭代查询 (主机向本地域名服务器查询)"></a>迭代查询 (主机向本地域名服务器查询)</h3><p>如果主机所询问的本地域名服务器不知道被查询域名的ip, 那么本地域名服务器就以DNS客户的身份，向其他根域名服务器继续发出查询请求报文(即替该主机继续查询)，而不是让该主机自己进行下一步的查询.因此，递归擦汗寻返回的查询结果或者是所要查询的ip地址，或者是报错，表示无法查询到所需的IP地址。</p>
+<h3 id="递归查询-本地域名服务器向根域名服务器查询"><a href="#递归查询-本地域名服务器向根域名服务器查询" class="headerlink" title="递归查询 (本地域名服务器向根域名服务器查询)"></a>递归查询 (本地域名服务器向根域名服务器查询)</h3><p>当根域名服务器收到本地域名服务器发出的迭代查询请求报文是，要么给出所要查询的IP地址，要么告诉本地域名服务器进行后续的查询(而不是替本地域名服务器进行后续的查询)。</p>
+<img src="/2020/11/10/%E7%BD%91%E7%BB%9C%E6%94%BB%E5%9F%8E%E7%8B%AE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/query.jpg" class="" title="query">
+<center>图片来源->bing搜索</center>
+
+
+<h2 id="Tcp-amp-Udp-Hot"><a href="#Tcp-amp-Udp-Hot" class="headerlink" title="Tcp &amp; Udp(Hot)"></a>Tcp &amp; Udp(Hot)</h2><h3 id="Tcp"><a href="#Tcp" class="headerlink" title="Tcp"></a>Tcp</h3><ul>
+<li>握手&amp;挥手</li>
+<li>滑窗控制 –&gt; 动态规划<h3 id="udp"><a href="#udp" class="headerlink" title="udp"></a>udp</h3></li>
+<li>头部大小: 8字节</li>
+</ul>
+<p>这部分内容太多了甚至还能引申出算法内容，以后单独拿出来讲吧~<br>(绝对不是挖坑！🕊)</p>
+<h2 id="电子邮件协议-IMAP-amp-POP3-Hot"><a href="#电子邮件协议-IMAP-amp-POP3-Hot" class="headerlink" title="电子邮件协议(IMAP &amp; POP3)(Hot)"></a>电子邮件协议(IMAP &amp; POP3)(Hot)</h2><p>区别: </p>
+<ol>
+<li>pop3协议允许电子邮件客户端下载服务器上的邮件，但是在客户端的操作(移动、标记已读等)，不会反馈到服务器上。</li>
+<li>IMAP客户端的操作都会反馈到服务器上</li>
+</ol>
+<h2 id="DES加密算法-Hot-None"><a href="#DES加密算法-Hot-None" class="headerlink" title="DES加密算法(Hot)(None)"></a>DES加密算法(Hot)(None)</h2><p>做了5年的软考题，DES加密算法可以说是必考题了，每年都考。</p>
+<h2 id="卫星通信中的差错控制"><a href="#卫星通信中的差错控制" class="headerlink" title="卫星通信中的差错控制"></a>卫星通信中的差错控制</h2><ol>
+<li>选择重传ARQ</li>
+<li>前项差错控制FEC</li>
+<li>多站分集的自动反馈重发</li>
+</ol>
+</div><div id="donate"><link rel="stylesheet" type="text/css" href="/css/donate.css"><script type="text/javascript" src="/js/donate.js" successtext="复制成功!"></script><a class="pos-f tr3" id="github" href="https://github.com/farmerChillax" target="_blank" rel="noopener" arget="_blank" title="Github"></a><div id="DonateText">Donate</div><ul class="list pos-f" id="donateBox"><li id="AliPay" qr="/img/AliPayQR.jpg"></li><li id="WeChat" qr="/img/WeChatQR.jpg"></li></ul><div class="pos-f left-100" id="QRBox"><div id="MainBox"></div></div></div><script type="text/javascript" src="/js/share.js?v=1.1.0" async></script><a class="article-share-link" data-url="https://blog.farmer233.top/2020/11/10/%E7%BD%91%E7%BB%9C%E6%94%BB%E5%9F%8E%E7%8B%AE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="cl3kx4b1i004rmd32cxd68yfo" data-qrcode="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAAD3UlEQVR42u3aW27jMBAEQN//0skBdiV3z1CGA5S/gsTmoxSgzRm+XvHr5/b17zuTz1695+pT+SxX7zn2woEDBw4c6622y72f62rMZD1XG25Xe7lyHDhw4MBxiCNZehuB9yO3UZrHah66OHDgwIHjezhmm4wWVM54f6jDgQMHDhzfz5FsPjl05dW5vCCIAwcOHDi+h2NWhsvjc1ZebKHbv+LAgQMHjic4Zu2iv/XzI/c7cODAgQNHXM47FkhlNJ4K4OHucODAgQPHmmNWsDvVFmqPf+07Z/vCgQMHDhzPcbSBNysI5tGetL7av9Y3LHDgwIEDx6h337aO7q8X7Ns/p8p/b8bBgQMHDhwPcLQR1QZkgt5+qo3ty5Fx4MCBA8eaIyqWHZryuWZV+zAiCBw4cODAMeJoi2sJway010b47MD55vHjwIEDB46HOc52ZJINt1EafXfIL0bgwIEDB441R16Gmy29ZW0pE5S2EIkDBw4cOJ7jyA9Xbbto1nZKgrN9nDhw4MCB4yzHrGCXH41yprZZ1RYf6/8LHDhw4MCx4JiVCNv2Tx6l++sR7bHwslaKAwcOHDhGHPni9u2fNvxOtaMiehw4cODA8QDHbEttATEfP4nqzSyXxUEcOHDgwDHimG17U7zbX5VrV5hfd8CBAwcOHHuO9viU/7wvDq4OY7PxceDAgQPHIY5NUG2CLQ/aPWVyCMSBAwcOHGc5XuUrCbnN+LOD32xkHDhw4MDxSY5TVwfuN5nMmHwVSA6llyvEgQMHDhxrjrZplIRfHpkJX/IwZpRFLw4HDhw4cMQc+bZnkblpR23i/8EuHA4cOHDgKDv4+dL3i5ht7FTp8D9z4cCBAweONcfmgsLZo1cRh4sZV80qHDhw4MARr2Qv1wZ2u/T8YNles4i+feDAgQMHjpijXXR7eKufzOgiQn7we/MbHDhw4MDxMEd+fyw5XJ2N5PYVweHAgQMHjjVHfjDLo2sWdW0pMA/mhL6uleLAgQMHjlFRr20U5QHZoudwm0IkDhw4cOA4xZEHbXtgy8d8ujgYNatw4MCBA8eaY18ya6N6c0miDdHZyDhw4MCBY8Mxa95sLg204ZdvNRnhNXu2OHDgwIFj3XCaxd6Mo20atcXBfC4cOHDgwHGKI5+4vZSQHBHbTeYhOvuigAMHDhw4TnG0QdVeU8gLjnmbanM8e1MixIEDBw4cH+fYXGLIYzsJ4+KyQvJIcODAgQPHxznywJsFZHtcTAI13ykOHDhw4DjFsQm29mpCe6mifWf+kFZtJxw4cODAsb7QMDsatZcSNiMnK0xmxIEDBw4cI45f7lBeYDAe+uEAAAAASUVORK5CYII=">分享</a><div class="tags"><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/"><i class="fa fa-tag"></i>计算机网络基础</a><a href="/tags/%E7%AC%94%E8%AE%B0/"><i class="fa fa-tag"></i>笔记</a></div><div class="post-nav"><a class="pre" href="/2020/12/23/%E8%93%9D%E6%A1%A5%E6%9D%AF%E6%A0%A1%E5%86%85%E9%80%89%E6%8B%94WP/">蓝桥杯校内选拔WP</a><a class="next" href="/2020/11/01/%E5%89%8D%E7%AB%AF-%E6%89%93%E5%AD%97%E6%95%88%E6%9E%9C/">前端 | 打字效果</a></div><div id="container"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/gitalk/dist/gitalk.css?v=1.1.0"><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=1.1.0"></script><script type="text/javascript" src="//unpkg.com/gitalk/dist/gitalk.min.js?v=1.1.0"></script><script>var gitalk = new Gitalk({
+  clientID: '0a5a339e4c6a3cc81b76',
+  clientSecret: 'ce2b79ca94465b2a758faca9e0b95e4df38d6204',
+  repo: 'FarmerChillax.github.io',
+  owner: 'FarmerChillax',
+  admin: ['FarmerChillax'],
+  id: md5(location.pathname),
+  distractionFreeMode: false
+})
+gitalk.render('container')
+</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%BA%86%E4%BA%9B%E4%BB%80%E4%B9%88/">学了些什么</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%90%9E%E4%BA%8B%E6%83%85/">搞事情</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%83%A1%E6%80%9D%E4%B9%B1%E8%AF%AD/">胡思乱语</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Golang/" style="font-size: 15px;">Golang</a> <a href="/tags/%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%AD/" style="font-size: 15px;">胡言乱语</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" style="font-size: 15px;">计算机网络基础</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 15px;">笔记</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 15px;">爬虫</a> <a href="/tags/%E6%AD%A3%E6%96%B9%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F/" style="font-size: 15px;">正方教务系统</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/CTF/" style="font-size: 15px;">CTF</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 15px;">C语言</a> <a href="/tags/%E5%88%B7%E9%A2%98/" style="font-size: 15px;">刷题</a> <a href="/tags/PTA/" style="font-size: 15px;">PTA</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 15px;">前端</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">算法和数据结构</a> <a href="/tags/leetcode/" style="font-size: 15px;">leetcode</a> <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 15px;">位运算</a> <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" style="font-size: 15px;">哈希表</a> <a href="/tags/Sliding-Window/" style="font-size: 15px;">Sliding Window</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 15px;">链表</a> <a href="/tags/DDNS/" style="font-size: 15px;">DDNS</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/" style="font-size: 15px;">生活记录</a> <a href="/tags/%E5%90%90%E6%A7%BD/" style="font-size: 15px;">吐槽</a> <a href="/tags/%E9%BB%91%E6%9A%97%E6%96%99%E7%90%86/" style="font-size: 15px;">黑暗料理</a> <a href="/tags/TypeScript/" style="font-size: 15px;">TypeScript</a> <a href="/tags/vs-code/" style="font-size: 15px;">vs code</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 15px;">插件</a> <a href="/tags/Flask-APIFlask/" style="font-size: 15px;">Flask/APIFlask</a> <a href="/tags/emotion/" style="font-size: 15px;">emotion</a> <a href="/tags/Rust/" style="font-size: 15px;">Rust</a> <a href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" style="font-size: 15px;">蓝桥杯</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/03/15/%E7%94%9F%EF%BC%8C%E6%B4%BB/">生，活</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/09/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E7%94%A8APIFlask%E5%81%9A%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF/">手把手教你用APIFlask做毕业设计后端—基本简介与Hello APIFlask!(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/15/%E7%94%A8Rust%E4%B8%BAPython%E5%8A%A0%E5%8F%8C%E7%BF%85%E8%86%80/">用Rust为Python加双翅膀</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E7%A7%8B%E6%8B%9B%E6%9D%82%E8%B0%88/">校招杂谈</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/07/Review-of-life-in-university/">Review of life in university ✔</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/05/A-distributed-with-Go/">A distributed system with Go</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/03/%E6%96%B0%E7%89%88%E6%AD%A3%E6%96%B9%E6%95%99%E5%8A%A1%E7%B3%BB%E7%BB%9F%E7%99%BB%E5%BD%95%E5%AE%9E%E7%8E%B0/">新版正方教务系统登录实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/20/Golang%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/">Golang基础语法笔记 | 数组、切片&映射</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/07/%E6%8F%90%E9%97%AE%E4%B8%AD%E9%9C%80%E8%A6%81%E9%81%BF%E5%85%8D%E7%9A%84%E4%B8%80%E4%BA%9B%E8%A1%8C%E4%B8%BA/">提问中需要避免的一些行为</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/02/Leetcode-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%A2%98%E7%9B%AE%E9%9B%86%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9/">[Leetcode]数据结构题目集的最后一天</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://blog.xiaotao233.top/" title="咸鱼的窝" target="_blank">咸鱼的窝</a><ul></ul><a href="https://blog.diyxi.top/" title="DIY，熙!" target="_blank">DIY，熙!</a><ul></ul><a href="https://darkroom.vip/" title="Dark的小黑屋" target="_blank">Dark的小黑屋</a><ul></ul><a href="https://blog.ziki2333.top/" title="ziki" target="_blank">ziki</a><ul></ul><a href="https://blog.feldan.top/" title="feldan" target="_blank">feldan</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2022 <a href="/." rel="nofollow">Farmer.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.1.0" async></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=1.1.0" async></script><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.1.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.1.0"></script></div></body></html>
