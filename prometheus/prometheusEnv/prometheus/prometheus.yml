@@ -33,7 +33,7 @@ scrape_configs:
          serviceName: 普罗米修斯
                 
 
-  # 我们自己的商城项目配置
+  # 我们自己的项目配置
   - job_name: 'node-exporter'
     static_configs:
       # 目标的采集地址
